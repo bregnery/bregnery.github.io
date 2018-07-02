@@ -1,0 +1,61 @@
+<h2 id="about-my-website">About my website</h2>
+
+<p>First off, welcome to my website! I have information about me on the <a href="">homepage</a> and career information on my <a href="">CV</a>.
+This website contains a hodgepodge of information including: useful links for CMS analysts, tutorials for using various 
+particle physics tools, infomation about fun programming tools, and posts about my current research.</p>
+
+<h2 id="the-cms-experiment">The CMS Experiment</h2>
+
+<p>The Compact Muon Solenoid (<a href="https://cms.cern">CMS</a>) experiment is particle detector at the Large Hadron Collider (LHC)
+located at the European Organization for Nuclear Research (<a href="https://home.cern">CERN</a>). CMS studies the fundamental building blocks of
+matter by observing proton-proton collisions at the 27 km LHC. In 2017, the CMS experiment observed collisions every 
+25 ns at center of mass energies of 13 TeV. In other words, CMS deals with high data rates, large amounts of data,
+and large backgrounds. CMS analysts need to utilize a range of skills to handle these problems–including: building
+custom electronics, working with machine learning algorithms, and using statistical software.</p>
+
+<h2 id="getting-started">Getting started</h2>
+
+<p><a href="https://pages.github.com">GitHub Pages</a> can automatically generate and serve the website for you.
+Let’s say you have a username/organisation <code class="highlighter-rouge">my-org</code> and project <code class="highlighter-rouge">my-proj</code>; if you locate Jekyll source under <code class="highlighter-rouge">docs</code> folder of master branch in your repo <code class="highlighter-rouge">github.com/my-org/my-proj</code>, the website will be served on <code class="highlighter-rouge">my-org.github.io/my-proj</code>.
+The good thing about coupling your documentation with the source repo is, whenever you merge features with regarding content to master branch, it will also be published on the webpage instantly.</p>
+
+<ol>
+  <li>Just <a href="https://github.com/aksakalli/jekyll-doc-theme/archive/gh-pages.zip">download the source</a> into your repo under <code class="highlighter-rouge">docs</code> folder.</li>
+  <li>Edit site settings in  <code class="highlighter-rouge">_config.yml</code> file according to your project. !!! <code class="highlighter-rouge">baseurl</code> should be your website’s relative URI like <code class="highlighter-rouge">/my-proj</code> !!!</li>
+  <li>Replace <code class="highlighter-rouge">favicon.ico</code> and <code class="highlighter-rouge">img/logonav.png</code> with your own logo.</li>
+</ol>
+
+<h2 id="writing-content">Writing content</h2>
+
+<h3 id="docs">Docs</h3>
+
+<p>Docs are <a href="https://jekyllrb.com/docs/collections/">collections</a> of pages stored under <code class="highlighter-rouge">_docs</code> folder. To create a new page:</p>
+
+<p><strong>1.</strong> Create a new Markdown as <code class="highlighter-rouge">_docs/my-page.md</code> and write <a href="https://jekyllrb.com/docs/frontmatter/">front matter</a> &amp; content such as:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>---
+title: My Page
+permalink: /docs/my-page/
+---
+
+Hello World!
+</code></pre>
+</div>
+
+<p><strong>2.</strong> Add the pagename to <code class="highlighter-rouge">_data/docs.yml</code> file in order to list in docs navigation panel:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>- title: My Group Title
+  docs:
+  - my-page
+</code></pre>
+</div>
+
+<h3 id="blog-posts">Blog posts</h3>
+
+<p>Add a new Markdown file such as <code class="highlighter-rouge">2017-05-09-my-post.md</code> and write the content similar to other post examples.</p>
+
+<h3 id="pages">Pages</h3>
+
+<p>The homepage is located under <code class="highlighter-rouge">index.html</code> file. You can change the content or design completely different welcome page for your taste. (You can use <a href="http://getbootstrap.com/components/">bootstrap components</a>)</p>
+
+<p>In order to add a new page, create a new <code class="highlighter-rouge">.html</code> or <code class="highlighter-rouge">.md</code> (markdown) file under root directory and link it in <code class="highlighter-rouge">_includes/topnav.html</code>.</p>

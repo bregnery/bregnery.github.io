@@ -1,0 +1,14 @@
+- title: Getting Started
+  docs:
+  - home
+  - themes
+  - customization
+
+- title: Tutorials
+  docs:
+  - FEWZtutorial
+  - BESTstandaloneTutorial
+
+- title: Resources
+  docs:
+  - monteCarloProduction

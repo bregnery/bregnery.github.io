@@ -1,0 +1,69 @@
+[
+
+  
+    
+    
+    {
+      "title": "Welcome",
+      "url": "/docs/home/"
+
+    },
+  
+    
+    
+    {
+      "title": "Themes",
+      "url": "/docs/themes/"
+
+    },
+  
+    
+    
+    {
+      "title": "Customization",
+      "url": "/docs/customization/"
+
+    },
+  
+
+  
+    
+    
+    {
+      "title": "FEWZ Tutorial",
+      "url": "/docs/FEWZtutorial/"
+
+    },
+  
+    
+    
+    {
+      "title": "BEST Using the Standalone Function",
+      "url": "/docs/BESTstandaloneTutorial/"
+
+    },
+  
+
+  
+    
+    
+    {
+      "title": "Resources for CMS Monte Carlo Production",
+      "url": "/docs/monteCarloProduction/"
+
+    },
+  
+
+
+  
+  {
+  "title": "Jekyll Doc Theme is published!",
+  "url": "/blog/2017/05/03/jekyll-doc-theme/"
+  },
+  
+  {
+  "title": "Welcome to Jekyll!",
+  "url": "/blog/2017/02/01/welcome-to-jekyll/"
+  }
+  
+]
