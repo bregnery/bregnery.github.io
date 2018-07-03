@@ -1,13 +1,12 @@
-- title: Getting Started
+- title: My Research
   docs:
   - home
-  - themes
-  - customization
 
 - title: Tutorials
   docs:
   - FEWZtutorial
   - BESTstandaloneTutorial
+  - monteCarloProduction2016
 
 - title: Resources
   docs:
