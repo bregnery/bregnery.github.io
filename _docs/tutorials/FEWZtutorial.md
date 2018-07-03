@@ -7,13 +7,14 @@ permalink: /docs/FEWZtutorial/
 
 ## Introduction
 
-FEWZ is a fortran-based Vegas simulator for calculating leading order (LO), next-to-leading order (NLO), and next-next-leading order (NNLO)
-Drell-Yan processes. In the past, I used this to calculate the background Drell-Yan shape for the Higgs to dimuons search [1]. 
+[FEWZ](http://gate.hep.anl.gov/fpetriello/FEWZ.html) is a fortran-based Vegas simulator for calculating leading order (LO), next-to-leading order (NLO), and next-next-leading order (NNLO)
+Drell-Yan processes [1]. In the past, I used this to calculate the background Drell-Yan shape for the Higgs to dimuons search. 
 
 ## Instructions
 
 All of the files necessary for compiling and using FEWZ are contained in my [GitHub Repository](https://github.com/bregnery/FEWZforHiggs2mumu),
-so first clone this repository.
+so first clone this repository. Please note that these are the files for the tutorial, an up-to-date version can be found on the
+[FEWZ website](http://gate.hep.anl.gov/fpetriello/FEWZ.html).
 
 ```bash
 git clone https://github.com/bregnery/FEWZforHiggs2mumu.git
@@ -21,7 +22,8 @@ git clone https://github.com/bregnery/FEWZforHiggs2mumu.git
 
 ### Installation
 
-These installation instructions are from [FEWZ]() [1]. Please note that you do not have to use Condor for submission, a shell submission
+These installation instructions are from [FEWZ](http://gate.hep.anl.gov/fpetriello/FEWZ.html) [1]. 
+Please note that you do not need to use Condor for submission, a shell submission
 script can be easily written for other systems. I included an example near the end of this tutorial.
 
 ```bash
@@ -59,12 +61,12 @@ contains bounds and bins for the values that are calculated by FEWZ. The output 
 
 For some examples, click [here](https://github.com/bregnery/FEWZforHiggs2mumu/tree/master/FEWZ/FEWZ_3.1.b2/bin). The files 
 labeled ``mu13tev-higgs*.txt`` contain parameters used to calculate the Drell-Yan background for various mass ranges at 
-CMS with collision energies of 13TeV. These files also use LHAPDFs which are included in this repository.
+CMS with collision energies of 13TeV. These files also use the LHAPDF set which are included in this repository [2].
 
 ## Example Running on the HiPerGator
 
 This is an example for running FEWZ on a server that uses SLURM (Simple Linux Utility for Resource Management).
-Load the necessary modules and enter development mode of the University of Florida's HiPerGator 2.0.
+First, load the necessary modules and enter development mode of the University of Florida's HiPerGator 2.0.
 
 ```bash
 module load ufrc
@@ -72,7 +74,8 @@ module load gcc
 srundev --time=04:00:00
 ```
 
-This is an example of how to submit a job. The submit script used in this example is FEWZforHiggs2mumu/FEWZ/FEWZ_3.1.b2/bin/dy_nlo_submit.sh
+The submit script used in this example is ``FEWZforHiggs2mumu/FEWZ/FEWZ_3.1.b2/bin/dy_nlo_submit.sh``. Now, use this to submit
+to the HiPerGator (or other SLURM system).
 
 ```bash
 sbatch dy_nlo_submit.sh
@@ -83,7 +86,7 @@ More information about the University of Florida's HiPerGator can be found the [
 
 ## Remarks
 
-FEWZ is a useful tool for calculating backgrounds, then other programs can be used to fit the shape of these backgrounds. In the
+FEWZ is a useful tool for calculating backgrounds; other programs can be used to fit the shape of these backgrounds. In the
 search for Higgs to dimuons, we used FEWZ to calculate our Drell-Yan background and found a function to fit the background shape 
 for the dimuon invariant mass. To see this in further detail, please see appendix A in our [CMS analysis note](http://cms.cern.ch/iCMS/jsp/db_notes/noteInfo.jsp?cmsnoteid=CMS%20AN-2017/098)
 
@@ -93,3 +96,4 @@ For an example fitting program, please see my
 ## References
 
 1. R. Gavin, Y. Li, F. Petriello, and S. Quackenbush, Comput. Phys. Commun. **182**, 2388-2403 (2011)
+2. A. Buckley, J. Ferrando, S. Lloyd, K. Nordstrom, B. Page, M. Rufenacht, M. Schonerr, and G. Watt, Eur. Phys. J. **C75**, 132 (2015)
