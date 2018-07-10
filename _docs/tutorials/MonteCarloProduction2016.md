@@ -1,6 +1,6 @@
 ---
 title: Monte Carlo Production with the 2016 CMS Scheme
-permalink: /docs/monteCarloProduction2016
+permalink: /docs/MonteCarloProduction2016/
 ---
 
 ## General Steps for Monte Carlo Production
