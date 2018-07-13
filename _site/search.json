@@ -4,7 +4,7 @@
     
     
     {
-      "title": "Welcome",
+      "title": "Introduction",
       "url": "/docs/home/"
 
     },
@@ -24,14 +24,6 @@
     {
       "title": "FEWZ Tutorial",
       "url": "/docs/FEWZtutorial/"
-
-    },
-  
-    
-    
-    {
-      "title": "BEST Using the Standalone Function",
-      "url": "/docs/BESTstandaloneTutorial/"
 
     },
   
