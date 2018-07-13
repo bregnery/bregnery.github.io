@@ -26,7 +26,8 @@ custom electronics, working with machine learning algorithms, and using statisti
 
 [B2G](https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBook) is a CMS physics analysis group (PAG). B2G searches for 
 resonances to heavy Standard Model particles; these resonances could be the result of extra dimensions, a fourth 
-generation of matter, or Supersymmetry. These resonances often have hadronic final states that contain jets with unique substructure.
+generation of matter, or Supersymmetry. These resonances often have hadronic final states that contain collimated streams
+of particles (jets) with unique substructure.
 
 I am involved with training neural networks to identify these jet substructures. In particular, I am interested 
 in diHiggs resonances and vector-like quarks with all hadronic final states.
