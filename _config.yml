@@ -2,16 +2,12 @@
 title: Brendan Regnery
 email: bjregnery(at)ucdavis.edu
 description: >
-  Jekyll Template for Project Websites
-  providing documentation and blog post pages.
+  The personal website of Brendan Regnery.
 
 baseurl: "" # the subpath of your site, e.g. /blog/
-#baseurl: "/jekyll-doc-theme" # the subpath of your site, e.g. /blog/
 url: https://bregnery.github.io/ # the base hostname & protocol for your site
 git_address: https://github.com/bregnery/bregnery.github.io
-#git_address: https://github.com/aksakalli/jekyll-doc-theme
-git_edit_address: https://github.com/bregnery/bregnery.github.io/blob/gh-pages
-#git_edit_address: https://github.com/aksakalli/jekyll-doc-theme/blob/gh-pages
+git_edit_address: https://github.com/bregnery/bregnery.github.io/
 
 # theme options from https://bootswatch.com/
 # comment out this to use default Bootstrap
