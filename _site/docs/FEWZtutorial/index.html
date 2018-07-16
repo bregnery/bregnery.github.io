@@ -24,9 +24,9 @@
 <meta property="og:url" content="http://localhost:4000/docs/FEWZtutorial/" />
 <meta property="og:site_name" content="Brendan Regnery" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2018-07-14T00:23:43+02:00" />
+<meta property="article:published_time" content="2018-07-17T01:08:58+02:00" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"FEWZ Tutorial","datePublished":"2018-07-14T00:23:43+02:00","dateModified":"2018-07-14T00:23:43+02:00","description":"FEWZ: Fully Exclusize W and Z Production","url":"http://localhost:4000/docs/FEWZtutorial/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"FEWZ Tutorial","datePublished":"2018-07-17T01:08:58+02:00","dateModified":"2018-07-17T01:08:58+02:00","description":"FEWZ: Fully Exclusize W and Z Production","url":"http://localhost:4000/docs/FEWZtutorial/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -155,7 +155,8 @@ Drell-Yan processes [1]. In the past, I used this to calculate the background Dr
 <h2 id="instructions">Instructions</h2>
 
 <p>All of the files necessary for compiling and using FEWZ are contained in my <a href="https://github.com/bregnery/FEWZforHiggs2mumu">GitHub Repository</a>,
-so first clone this repository. Please note that these are the files for the tutorial, an up-to-date version can be found on the
+so first clone this repository. Please note that the files in that repository are the programs for the tutorial and may be out-of-date. 
+An up-to-date version of FEWZ can be found on the
 <a href="http://gate.hep.anl.gov/fpetriello/FEWZ.html">FEWZ website</a>.</p>
 
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/bregnery/FEWZforHiggs2mumu.git
@@ -177,11 +178,21 @@ make <span class="c"># makes both, an error will be thrown if you do not have Co
 
 <p>All makes will compile the necessary CUBA library provided automatically</p>
 
+<h2 id="organization">Organization</h2>
+
+<p>The <code class="highlighter-rouge">input.txt</code> file contains the adjustable parameters about the process being simulated. For example: the collision energy,
+particle masses, pT and eta ranges for different particles, PDF information, and particle couplings. The <code class="highlighter-rouge">histogram.txt</code> file 
+contains bounds and bins for the values that are calculated by FEWZ. The output will be stored in <code class="highlighter-rouge">.dat</code> files.</p>
+
+<p>For some examples, click <a href="https://github.com/bregnery/FEWZforHiggs2mumu/tree/master/FEWZ/FEWZ_3.1.b2/bin">here</a>. The files 
+labeled <code class="highlighter-rouge">mu13tev-higgs*.txt</code> contain parameters used to calculate the Drell-Yan background for various mass ranges at 
+CMS with collision energies of 13TeV. These files also use the LHAPDF set which are included in this repository [2].</p>
+
 <h3 id="running-locally">Running Locally</h3>
 
 <p>In order to run the FEWZ program, first change into the FEWZ bin directory. Then copy the input.txt 
 and histograms.txt from the desired directory to the bin directory. Now run the local version of 
-FEWZ in the bin by using the shell script local_run.sh with the following command</p>
+FEWZ in the bin directory by using the shell script local_run.sh with the following command</p>
 
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code>./local_run.sh z &lt;run_dir&gt; input.txt histograms.txt results.dat .. &lt;number_of_processors&gt;
 </code></pre>
@@ -195,20 +206,11 @@ FEWZ in the bin by using the shell script local_run.sh with the following comman
 
 <p>The possible order prefixes are LO, NLO, and NNLO.</p>
 
-<h2 id="organization">Organization</h2>
-
-<p>The <code class="highlighter-rouge">input.txt</code> file contains the adjustable parameters about the process being simulated. For example: the collision energy,
-particle masses, pT and eta ranges for different particles, PDF information, and particle couplings. The <code class="highlighter-rouge">histogram.txt</code> file 
-contains bounds and bins for the values that are calculated by FEWZ. The output will be stored in <code class="highlighter-rouge">.dat</code> files.</p>
-
-<p>For some examples, click <a href="https://github.com/bregnery/FEWZforHiggs2mumu/tree/master/FEWZ/FEWZ_3.1.b2/bin">here</a>. The files 
-labeled <code class="highlighter-rouge">mu13tev-higgs*.txt</code> contain parameters used to calculate the Drell-Yan background for various mass ranges at 
-CMS with collision energies of 13TeV. These files also use the LHAPDF set which are included in this repository [2].</p>
-
 <h2 id="example-running-on-the-hipergator">Example Running on the HiPerGator</h2>
 
 <p>This is an example for running FEWZ on a server that uses SLURM (Simple Linux Utility for Resource Management).
-First, load the necessary modules and enter development mode of the University of Florida’s HiPerGator 2.0.</p>
+Specifically, this is for the University of Florida’s HiPerGator 2.0.
+First, load the necessary modules and enter development mode.</p>
 
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code>module load ufrc
 module load gcc

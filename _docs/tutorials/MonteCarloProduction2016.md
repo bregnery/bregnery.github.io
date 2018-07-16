@@ -6,9 +6,9 @@ permalink: /docs/MonteCarloProduction2016/
 ## General Steps for Monte Carlo Production
 
 Monte Carlo simulations use statistical Monte Carlo methods on various physical models to predict the results of 
-a particle collision and then simulate the detector response to those particles. For CMS a typical process is to 
-use programs like MadGraph and Pythia to calculate differential cross sections and final states, then to pass the 
-results to a program like GEANT that simulates the detector response. Most of this can be done using cmsdriver to 
+a particle collision and then simulate the detector response to those particles. For CMS, this is accomplished by
+using programs like MadGraph and Pythia to calculate differential cross sections and final states, then passing the 
+results to a program like GEANT which simulates the detector response. Most of this can be done using cmsdriver to 
 create automated configuration files.
 
 I preformed a Monte Carlo simulation with two main steps. First, I used MadGraph data cards as inputs for gridpack 
@@ -24,9 +24,9 @@ PowHeg. A detailed guide for this, is the [MadGraphGuide](https://twiki.cern.ch/
 The Genproductions group is in charge of producing gridpacks that are requested by each physics group, their data 
 cards are stored on [GitHub, genproductions](https://github.com/cms-sw/genproductions/tree/pre2017)
 
-Producing a MadGraph gridpack requires four main files: ``MC_proc_card.dat, MC_run_card.dat, MC_customizecards.dat 
-and MC_extramodels.dat``. Examples of these files can be found on the Genproductions GitHub repository. These examples 
-are excellent templates for making gridpacks. Gridpacks can then be produced locally or via submitting to a computing grid. 
+Producing a MadGraph gridpack requires four main files: ``MC_proc_card.dat``, ``MC_run_card.dat``, ``MC_customizecards.dat`` 
+and ``MC_extramodels.dat``. Examples of these files can be found on the Genproductions GitHub repository. These examples 
+are excellent templates for making gridpacks. Gridpacks can then be produced locally or by submitting to a computing grid. 
 Below is a tutorial based on how I created gridpacks.
 
 ### MadGraph Gridpack Tutorial
@@ -74,7 +74,7 @@ For example,
 
 #### Notes about Creating/Editing Data Cards
 
-When creating or editing data cards, make sure to create four cards with the name as your repository.
+When creating or editing data cards, make sure to create four cards with the same name as your repository.
 
 ```bash
 <repository>_proc_card.dat
@@ -83,7 +83,8 @@ When creating or editing data cards, make sure to create four cards with the nam
 <repository>_extramodels.dat
 ```
 
-Make sure to less models needed in extra models if running beyond Standard Model. Number of events is listed listed in 
+Make sure to list models needed in extra models if generating a sample with something other than the Standard Model. 
+The number of events is listed listed in 
 ``run_card.dat``. When using the gridpacks **DO NOT generate more events than what is listed in** ``run_card.dat``.
 
 ## From Gridpacks to MiniAOD
@@ -132,9 +133,11 @@ cd hhMCgenerator
 Make sure to copy your gridpack into this directory. Now, obtain the proper python fragments (these should also be included
 on the McM page).
 
+```bash
 curl -s --insecure https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_fragment/B2G-RunIISummer15wmLHEGS-01167 --retry 2 --create-dirs -o Configuration/GenProduction/python/B2G-RunIISummer15wmLHEGS-01167-fragment.py 
 [ -s Configuration/GenProduction/python/B2G-RunIISummer15wmLHEGS-01167-fragment.py ]
 scram b
+```
 
 Now modify the python fragment to input the proper grid pack. In 
 ``CMSSW_X_X_X/src/Configuration/Genproduction/python/B2G-RunIISummer15wmLHEGS-01167-fragment.py`` line 5 should 
@@ -224,5 +227,5 @@ If the whole process was successful, the output should be ``Radion_hh_wwww_M3500
 ## Remarks
 
 After creating the necessary configuration files using cmsdriver, I created a work flow that utilized crab and stored the simulation files
-on the LPC using EOS. This is documented on the [hhMCgenerator repository](https://github.com/bregnery/hhMCgenerator).
+on the LPC using EOS. This is documented on my [hhMCgenerator repository](https://github.com/bregnery/hhMCgenerator).
 

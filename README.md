@@ -1,6 +1,8 @@
-# Jekyll Doc Theme
+# Personal Website
 
-Go to [the website](https://aksakalli.github.io/jekyll-doc-theme/) for detailed information and demo.
+This website was made with the [Jekyll Doc Theme](https://aksakalli.github.io/jekyll-doc-theme/).
+
+The local run instructions are directly from aksalli's original readme:
 
 ## Running locally
 
@@ -17,7 +19,5 @@ cd jekyll-doc-theme
 # run jekyll with dependencies
 bundle exec jekyll serve
 ```
+To run this specific website locally, just replace the template repository with this repository.
 
-## License
-
-Released under [the MIT license](LICENSE).

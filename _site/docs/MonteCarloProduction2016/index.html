@@ -24,9 +24,9 @@
 <meta property="og:url" content="http://localhost:4000/docs/MonteCarloProduction2016/" />
 <meta property="og:site_name" content="Brendan Regnery" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2018-07-14T00:23:43+02:00" />
+<meta property="article:published_time" content="2018-07-17T01:08:58+02:00" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Monte Carlo Production with the 2016 CMS Scheme","datePublished":"2018-07-14T00:23:43+02:00","dateModified":"2018-07-14T00:23:43+02:00","description":"General Steps for Monte Carlo Production","url":"http://localhost:4000/docs/MonteCarloProduction2016/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Monte Carlo Production with the 2016 CMS Scheme","datePublished":"2018-07-17T01:08:58+02:00","dateModified":"2018-07-17T01:08:58+02:00","description":"General Steps for Monte Carlo Production","url":"http://localhost:4000/docs/MonteCarloProduction2016/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -148,9 +148,9 @@
             <div id="markdown-content-container"><h2 id="general-steps-for-monte-carlo-production">General Steps for Monte Carlo Production</h2>
 
 <p>Monte Carlo simulations use statistical Monte Carlo methods on various physical models to predict the results of 
-a particle collision and then simulate the detector response to those particles. For CMS a typical process is to 
-use programs like MadGraph and Pythia to calculate differential cross sections and final states, then to pass the 
-results to a program like GEANT that simulates the detector response. Most of this can be done using cmsdriver to 
+a particle collision and then simulate the detector response to those particles. For CMS, this is accomplished by
+using programs like MadGraph and Pythia to calculate differential cross sections and final states, then passing the 
+results to a program like GEANT which simulates the detector response. Most of this can be done using cmsdriver to 
 create automated configuration files.</p>
 
 <p>I preformed a Monte Carlo simulation with two main steps. First, I used MadGraph data cards as inputs for gridpack 
@@ -166,9 +166,9 @@ PowHeg. A detailed guide for this, is the <a href="https://twiki.cern.ch/twiki/b
 The Genproductions group is in charge of producing gridpacks that are requested by each physics group, their data 
 cards are stored on <a href="https://github.com/cms-sw/genproductions/tree/pre2017">GitHub, genproductions</a></p>
 
-<p>Producing a MadGraph gridpack requires four main files: <code class="highlighter-rouge">MC_proc_card.dat, MC_run_card.dat, MC_customizecards.dat 
-and MC_extramodels.dat</code>. Examples of these files can be found on the Genproductions GitHub repository. These examples 
-are excellent templates for making gridpacks. Gridpacks can then be produced locally or via submitting to a computing grid. 
+<p>Producing a MadGraph gridpack requires four main files: <code class="highlighter-rouge">MC_proc_card.dat</code>, <code class="highlighter-rouge">MC_run_card.dat</code>, <code class="highlighter-rouge">MC_customizecards.dat</code> 
+and <code class="highlighter-rouge">MC_extramodels.dat</code>. Examples of these files can be found on the Genproductions GitHub repository. These examples 
+are excellent templates for making gridpacks. Gridpacks can then be produced locally or by submitting to a computing grid. 
 Below is a tutorial based on how I created gridpacks.</p>
 
 <h3 id="madgraph-gridpack-tutorial">MadGraph Gridpack Tutorial</h3>
@@ -215,7 +215,7 @@ be generated using the desired data card.</p>
 
 <h4 id="notes-about-creatingediting-data-cards">Notes about Creating/Editing Data Cards</h4>
 
-<p>When creating or editing data cards, make sure to create four cards with the name as your repository.</p>
+<p>When creating or editing data cards, make sure to create four cards with the same name as your repository.</p>
 
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code>&lt;repository&gt;_proc_card.dat
 &lt;repository&gt;_run_card.dat
@@ -224,7 +224,8 @@ be generated using the desired data card.</p>
 </code></pre>
 </div>
 
-<p>Make sure to less models needed in extra models if running beyond Standard Model. Number of events is listed listed in 
+<p>Make sure to list models needed in extra models if generating a sample with something other than the Standard Model. 
+The number of events is listed listed in 
 <code class="highlighter-rouge">run_card.dat</code>. When using the gridpacks <strong>DO NOT generate more events than what is listed in</strong> <code class="highlighter-rouge">run_card.dat</code>.</p>
 
 <h2 id="from-gridpacks-to-miniaod">From Gridpacks to MiniAOD</h2>
@@ -277,9 +278,11 @@ cmsenv
 <p>Make sure to copy your gridpack into this directory. Now, obtain the proper python fragments (these should also be included
 on the McM page).</p>
 
-<p>curl -s –insecure https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_fragment/B2G-RunIISummer15wmLHEGS-01167 –retry 2 –create-dirs -o Configuration/GenProduction/python/B2G-RunIISummer15wmLHEGS-01167-fragment.py 
-[ -s Configuration/GenProduction/python/B2G-RunIISummer15wmLHEGS-01167-fragment.py ]
-scram b</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>curl -s --insecure https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_fragment/B2G-RunIISummer15wmLHEGS-01167 --retry 2 --create-dirs -o Configuration/GenProduction/python/B2G-RunIISummer15wmLHEGS-01167-fragment.py 
+<span class="o">[</span> -s Configuration/GenProduction/python/B2G-RunIISummer15wmLHEGS-01167-fragment.py <span class="o">]</span>
+scram b
+</code></pre>
+</div>
 
 <p>Now modify the python fragment to input the proper grid pack. In 
 <code class="highlighter-rouge">CMSSW_X_X_X/src/Configuration/Genproduction/python/B2G-RunIISummer15wmLHEGS-01167-fragment.py</code> line 5 should 
@@ -368,7 +371,7 @@ cmsRun B2G-RunIISummer16MiniAODv2_Radion_hh_wwww_M3500-MiniAOD_1_cfg.py
 <h2 id="remarks">Remarks</h2>
 
 <p>After creating the necessary configuration files using cmsdriver, I created a work flow that utilized crab and stored the simulation files
-on the LPC using EOS. This is documented on the <a href="https://github.com/bregnery/hhMCgenerator">hhMCgenerator repository</a>.</p>
+on the LPC using EOS. This is documented on my <a href="https://github.com/bregnery/hhMCgenerator">hhMCgenerator repository</a>.</p>
 
 </div>
             <p class="text-center">

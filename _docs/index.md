@@ -10,7 +10,7 @@ First off, welcome to my website! I have information about me on the [homepage](
 This website contains a hodgepodge of information including: useful links for CMS analysts, tutorials for using various 
 particle physics tools, infomation about fun programming tools, and posts about my current research.
 
-This page provides a breif introduction to my research. For more advanced information, tutorials, and resources please explore any of the 
+This page provides a brief introduction to my research. For more advanced information, tutorials, and resources please explore any of the 
 links on my website.
 
 ## The CMS Experiment
@@ -19,13 +19,13 @@ The Compact Muon Solenoid ([CMS](https://cms.cern)) experiment is particle detec
 located at the European Organization for Nuclear Research ([CERN](https://home.cern)). CMS studies the fundamental building blocks of
 matter by observing proton-proton collisions at the 27 km LHC. In 2017, the CMS experiment observed collisions every 
 25 ns at center of mass energies of 13 TeV. In other words, CMS deals with high data rates, large amounts of data,
-and large backgrounds. CMS analysts need to utilize a range of skills to handle these problems--including: building
-custom electronics, working with machine learning algorithms, and using statistical software.
+and large backgrounds. CMS analysts need to utilize a range of skills to handle these problems---including: building
+custom electronics, working with machine learning algorithms, and using specialized software.
 
 ## Beyond Two Generations (B2G)
 
 [B2G](https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBook) is a CMS physics analysis group (PAG). B2G searches for 
-resonances to heavy Standard Model particles; these resonances could be the result of extra dimensions, a fourth 
+resonances decaying to heavy Standard Model particles; these resonances could be the result of extra dimensions, a fourth 
 generation of matter, or Supersymmetry. These resonances often have hadronic final states that contain collimated streams
 of particles (jets) with unique substructure.
 
@@ -58,7 +58,7 @@ a set of custom electronics. I assisted with the upgrade from the CSCTF to the E
 ### Search for Anamolous Production of Boosted Z Bosons
 
 For my undergraduate thesis at the University of Florida, I conducted a preliminary search for anomolous production of boosted Z
-bosons decaying to two muons. If discovered, these Z bosons would be the result of new physics, possible new particles. Currently,
+bosons decaying to two muons. If discovered, these Z bosons would be the result of new physics. Currently,
 this thesis is not publicly available. I will update this website with links once it becomes publicly accessible.
 
 

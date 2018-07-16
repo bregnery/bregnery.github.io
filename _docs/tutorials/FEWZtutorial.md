@@ -13,7 +13,8 @@ Drell-Yan processes [1]. In the past, I used this to calculate the background Dr
 ## Instructions
 
 All of the files necessary for compiling and using FEWZ are contained in my [GitHub Repository](https://github.com/bregnery/FEWZforHiggs2mumu),
-so first clone this repository. Please note that these are the files for the tutorial, an up-to-date version can be found on the
+so first clone this repository. Please note that the files in that repository are the programs for the tutorial and may be out-of-date. 
+An up-to-date version of FEWZ can be found on the
 [FEWZ website](http://gate.hep.anl.gov/fpetriello/FEWZ.html).
 
 ```bash
@@ -35,11 +36,21 @@ make # makes both, an error will be thrown if you do not have Condor installed
 
 All makes will compile the necessary CUBA library provided automatically
 
+## Organization
+
+The ``input.txt`` file contains the adjustable parameters about the process being simulated. For example: the collision energy,
+particle masses, pT and eta ranges for different particles, PDF information, and particle couplings. The ``histogram.txt`` file 
+contains bounds and bins for the values that are calculated by FEWZ. The output will be stored in ``.dat`` files.
+
+For some examples, click [here](https://github.com/bregnery/FEWZforHiggs2mumu/tree/master/FEWZ/FEWZ_3.1.b2/bin). The files 
+labeled ``mu13tev-higgs*.txt`` contain parameters used to calculate the Drell-Yan background for various mass ranges at 
+CMS with collision energies of 13TeV. These files also use the LHAPDF set which are included in this repository [2].
+
 ### Running Locally
 
 In order to run the FEWZ program, first change into the FEWZ bin directory. Then copy the input.txt 
 and histograms.txt from the desired directory to the bin directory. Now run the local version of 
-FEWZ in the bin by using the shell script local_run.sh with the following command
+FEWZ in the bin directory by using the shell script local_run.sh with the following command
 
 ```bash
 ./local_run.sh z <run_dir> input.txt histograms.txt results.dat .. <number_of_processors>
@@ -53,20 +64,11 @@ The ``run_dir`` is a directory created in order to store information from the ru
 
 The possible order prefixes are LO, NLO, and NNLO.
 
-## Organization
-
-The ``input.txt`` file contains the adjustable parameters about the process being simulated. For example: the collision energy,
-particle masses, pT and eta ranges for different particles, PDF information, and particle couplings. The ``histogram.txt`` file 
-contains bounds and bins for the values that are calculated by FEWZ. The output will be stored in ``.dat`` files.
-
-For some examples, click [here](https://github.com/bregnery/FEWZforHiggs2mumu/tree/master/FEWZ/FEWZ_3.1.b2/bin). The files 
-labeled ``mu13tev-higgs*.txt`` contain parameters used to calculate the Drell-Yan background for various mass ranges at 
-CMS with collision energies of 13TeV. These files also use the LHAPDF set which are included in this repository [2].
-
 ## Example Running on the HiPerGator
 
 This is an example for running FEWZ on a server that uses SLURM (Simple Linux Utility for Resource Management).
-First, load the necessary modules and enter development mode of the University of Florida's HiPerGator 2.0.
+Specifically, this is for the University of Florida's HiPerGator 2.0.
+First, load the necessary modules and enter development mode.
 
 ```bash
 module load ufrc
