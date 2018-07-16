@@ -2,7 +2,7 @@
 
 This website was made with the [Jekyll Doc Theme](https://aksakalli.github.io/jekyll-doc-theme/).
 
-The local run instructions are directly from aksalli's original readme:
+The local run instructions are directly from [aksalli's original readme](https://github.com/aksakalli/jekyll-doc-theme):
 
 ## Running locally
 
