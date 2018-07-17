@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Resources for CMS Monte Carlo Production</title>
-    <meta name="description" content="Adapted from my CERN TWiki">
+    <title>Introductory Resources for CSCs</title>
+    <meta name="description" content="What is a Cathode Strip Chamber?">
 
 
     <link rel="stylesheet" href="/css/main.css">
@@ -15,22 +15,22 @@
 
     <link rel="shortcut icon" href="/favicon.ico?1">
     <!-- Begin Jekyll SEO tag v2.2.2 -->
-<title>Resources for CMS Monte Carlo Production | Brendan Regnery</title>
-<meta property="og:title" content="Resources for CMS Monte Carlo Production" />
+<title>Introductory Resources for CSCs | Brendan Regnery</title>
+<meta property="og:title" content="Introductory Resources for CSCs" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Adapted from my CERN TWiki" />
-<meta property="og:description" content="Adapted from my CERN TWiki" />
-<link rel="canonical" href="http://localhost:4000/docs/monteCarloProduction/" />
-<meta property="og:url" content="http://localhost:4000/docs/monteCarloProduction/" />
+<meta name="description" content="What is a Cathode Strip Chamber?" />
+<meta property="og:description" content="What is a Cathode Strip Chamber?" />
+<link rel="canonical" href="http://localhost:4000/docs/cscIntroResources/" />
+<meta property="og:url" content="http://localhost:4000/docs/cscIntroResources/" />
 <meta property="og:site_name" content="Brendan Regnery" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2018-07-17T03:13:56+02:00" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Resources for CMS Monte Carlo Production","datePublished":"2018-07-17T03:13:56+02:00","dateModified":"2018-07-17T03:13:56+02:00","description":"Adapted from my CERN TWiki","url":"http://localhost:4000/docs/monteCarloProduction/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Introductory Resources for CSCs","datePublished":"2018-07-17T03:13:56+02:00","dateModified":"2018-07-17T03:13:56+02:00","description":"What is a Cathode Strip Chamber?","url":"http://localhost:4000/docs/cscIntroResources/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
-    <link rel="canonical" href="http://localhost:4000/docs/monteCarloProduction/">
+    <link rel="canonical" href="http://localhost:4000/docs/cscIntroResources/">
     <link rel="alternate" type="application/rss+xml" title="Brendan Regnery" href="http://localhost:4000/feed.xml" />
 </head>
 
@@ -133,11 +133,11 @@
         
           
           
-          <a class="list-group-item active" href="/docs/monteCarloProduction/">Resources for CMS Monte Carlo Production</a>
+          <a class="list-group-item " href="/docs/monteCarloProduction/">Resources for CMS Monte Carlo Production</a>
         
           
           
-          <a class="list-group-item " href="/docs/cscIntroResources/">Introductory Resources for CSCs</a>
+          <a class="list-group-item active" href="/docs/cscIntroResources/">Introductory Resources for CSCs</a>
         
       </ul>
     </div>
@@ -148,54 +148,49 @@
         </div>
 
         <div class="col-md-8">
-            <h1>Resources for CMS Monte Carlo Production</h1>
-            <div id="markdown-content-container"><p>Adapted from my CERN <a href="https://twiki.cern.ch/twiki/bin/view/Sandbox/MonteCarloGenerationResources">TWiki</a></p>
+            <h1>Introductory Resources for CSCs</h1>
+            <div id="markdown-content-container"><h2 id="what-is-a-cathode-strip-chamber">What is a Cathode Strip Chamber?</h2>
 
-<h2 id="important-tools">Important Tools</h2>
-
-<p>The Monte Carlo Management (McM) website is an incredibly useful tool. It can be used to view the status of current sample production, view work flows for previous samples, and find cmsdriver commands. It is also used by the generator contact in each Physics Analysis Group (PAG) to request the production of new Monte Carlo samples.</p>
-
-<ul>
-  <li><a href="https://cms-pdmv.cern.ch/mcm/">McM Website</a></li>
-</ul>
-
-<p>The production Monitoring platform (pMp) website displays the status of Monte Carlo samples that are currently being produced.</p>
+<p>A Cathode Strip Chamber (CSC) is a precision gas chamber 
+that can operate with high rates and in irregular magnetic fields. Inside of a CSC are radial cathode strips
+and orthogonal anode wires. As muons pass through these chambers, they create a trail of ions. The electrons 
+in this trail move toward anode wires and the positively charged ions move towrd the cathode strips. Using this
+information, the paths of muons through the endcaps of the CMS detector can be reconstructed. Below are some 
+great introcutory resources for CSCs:</p>
 
 <ul>
-  <li><a href="https://cms-pdmv.cern.ch/pmp/">pMp Website</a></li>
+  <li><a href="https://indico.cern.ch/event/741985/contributions/3063856/attachments/1687236/2713594/18-07-16_manuelf_csc_intro.pdf">Introduction to CSCs</a>
+provides a quick overview of CSCs</li>
+  <li><a href="https://indico.cern.ch/event/522500/">CSC 101</a> is a very detailed overview of the CSCs with many slide shows</li>
 </ul>
 
-<h2 id="tutorials">Tutorials</h2>
+<h2 id="resources-for-csc-electronics">Resources for CSC Electronics</h2>
 
-<p>Hands-on Advanced Tutorial Sessions (HATS) at the LPC are great learning resource. The generator HATS is especially great, it teaches the basics of using pythia via cmsdriver, reading particle decay chains, using McM, and using tools for calculating cross sections. Below are links to the indico page and the twiki page. The twiki page has detailed exercises that are nice to work through. There is also a recording, which I will add a link to when it is uploaded.</p>
+<p>The specialized electronics in the CSCs have many acronyms and this gets very jargon heavy. Manuel Franco Sevilla wrote
+a great 
+<a href="https://indico.cern.ch/event/741985/contributions/3063857/attachments/1687237/2713595/18-07-16_manuelf_csc_electronics.pdf">overview of CSC electronics</a>,
+which defines many of these acronyms.
+The full indico event should eventually include a recording. This event is linked below:</p>
 
 <ul>
-  <li><a href="https://indico.cern.ch/event/726641/">HATS Generators Indco Page</a></li>
-  <li><a href="https://twiki.cern.ch/twiki/bin/view/CMS/GeneratorsHATSatLPC2018">HATS Generators TWiki Page</a></li>
+  <li><a href="https://indico.cern.ch/event/741985/">Introduction to CSC electronics</a></li>
 </ul>
 
-<p>The McM and pMp tutorial by CMS Generators is another useful resource. It has a good overview on how to use McM and pMp. This tutorial also contains some advanced material that is meant for use only by PAG Gen contacts, but the advanced parts are easily skipped. The indico page is below.</p>
+<h1 id="additional-resources">Additional Resources</h1>
+
+<p>These links contain more advanced material:</p>
 
 <ul>
-  <li><a href="https://indico.cern.ch/event/735384/">McM and pMp Tutorial</a></li>
+  <li><a href="https://twiki.cern.ch/twiki/bin/view/CMS/MuonCSC">CSC TWiki</a></li>
+  <li><a href="https://hypernews.cern.ch/HyperNews/CMS/get/csc-ops.html">CSC Hypernews</a></li>
+  <li><a href="https://cds.cern.ch/record/2283189">2017 Muon Phase 2 Upgrade TDR</a></li>
+  <li><a href="https://cds.cern.ch/record/2283189">1997 Muon TDR</a></li>
 </ul>
 
-<h2 id="other-resources">Other Resources</h2>
-
-<p>For an example of producing private Monte Carlo samples, please see <a href="https://twiki.cern.ch/twiki/bin/view/Sandbox/StandAloneMonteCarloGeneration">StandAloneMonteCarloGeneration</a></p>
-
-<p>For information about producing Gridpacks with MadGraph, please see <a href="https://twiki.cern.ch/twiki/bin/view/CMS/QuickGuideMadGraph5aMCatNLO">MadGraphGuide</a></p>
-
-<p>For documentation on Pythia and MadGraph, use the links below.</p>
-
-<ul>
-  <li><a href="http://madgraph.physics.illinois.edu/">MadGraph Documentation</a></li>
-  <li><a href="http://home.thep.lu.se/~torbjorn/pythia81html/Welcome.html">Pythia Documentation</a></li>
-</ul>
 </div>
             <p class="text-center">
               <br />
-              <a target="_blank" href="https://github.com/bregnery/bregnery.github.io/tree/master/_docs/resources/monteCarloProduction.md" class="btn btn-default githubEditButton" role="button">
+              <a target="_blank" href="https://github.com/bregnery/bregnery.github.io/tree/master/_docs/resources/cscIntroResources.md" class="btn btn-default githubEditButton" role="button">
                 <i class="fa fa-pencil fa-lg"></i> Improve this page
               </a>
             </p>
@@ -217,22 +212,23 @@
 
   
   
+
+  
+  
     <ul class="pager">
       
         
         
         <li class="previous">
-          <a href="/docs/FEWZtutorial/">
+          <a href="/docs/monteCarloProduction/">
             <span aria-hidden="true">&larr;</span> Previous
           </a>
         </li>
       
 
       
-        
-        
-        <li class="next">
-          <a href="/docs/cscIntroResources/">
+        <li class="next disabled">
+          <a>
             Next <span aria-hidden="true">&rarr;</span>
           </a>
         </li>
