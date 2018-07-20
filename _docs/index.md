@@ -6,7 +6,8 @@ redirect_from: /docs/index.html
 
 ## About my website
 
-First off, welcome to my website! I have information about me on the [homepage](https://bregnery.github.io) and career information on my [CV]().
+First off, welcome to my website! I have information about me on the [homepage](https://bregnery.github.io) and career information on my 
+[CV](https://bregnery.github.io/cv/main/).
 This website contains a hodgepodge of information including: useful links for CMS analysts, tutorials for using various 
 particle physics tools, infomation about fun programming tools, and posts about my current research.
 
