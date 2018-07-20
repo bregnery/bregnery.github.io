@@ -46,8 +46,20 @@ defaults:
     seo:
       type: "WebPage"
 
+- scope:
+    path: _cv
+    type: cv
+  values:
+    layout: cv
+    sectionid: cv
+    seo:
+      type: "WebPage"
+
 collections:
   docs:
+    permalink: /:collection/:path/
+    output: true
+  cv:
     permalink: /:collection/:path/
     output: true
   posts:
