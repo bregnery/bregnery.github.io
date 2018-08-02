@@ -22,7 +22,7 @@ Minor: Zoology
 2013-2017 **Undergraduate Research Assistant**, Department of Physics, University of Florida  
 *Advisor: Darin Acosta*
 
-2015-2015 **Undergraduate Research Assistant**, Department of Biologry, University of Florida  
+2014-2015 **Undergraduate Research Assistant**, Department of Biology, University of Florida  
 *Advisor: Trevor Caughlin*
 
 ### Awards and Afiliations

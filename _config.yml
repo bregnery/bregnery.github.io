@@ -55,11 +55,23 @@ defaults:
     seo:
       type: "WebPage"
 
+- scope:
+    path: _ecology
+    type: ecology
+  values:
+    layout: ecology
+    sectionid: ecology
+    seo:
+      type: "WebPage"
+
 collections:
   docs:
     permalink: /:collection/:path/
     output: true
   cv:
+    permalink: /:collection/:path/
+    output: true
+  ecology:
     permalink: /:collection/:path/
     output: true
   posts:

@@ -78,4 +78,62 @@ add the necessary functions to the BuildFile.xml
 <use name="lwtnn/lwtnn"/>
 <use name="BESTAnalysis/BoostedEventShapeTagger"/>
 ```
+In the same directory, the DemoAnalyzer.cc file must also be altered. 
+
+```cpp
+// In the include files
+#include "BESTAnalysis/BoostedEventShapeTagger/interface/BoostedEventShapeTagger.h"
+#include "DataFormats/PatCandidates/interface/Jet.h"
+
+// In the class, under private:
+BoostedEventShapeTagger *m_BEST;
+
+// In the constructor pass the name of the configuration file
+m_BEST = new BoostedEventShapeTagger( "/full_path/BESTAnalysis/BoostedEventShapeTagger/data/config.txt" );
+   // Define input tags
+edm::InputTag ak8JetsTag_;
+ak8JetsTag_ = edm::InputTag("slimmedJetsAK8", "", "PAT");
+ak8JetsToken_ = consumes<std::vector<pat::Jet> >(ak8JetsTag_);
+
+// In the destructor
+delete m_BEST;
+
+// In the event loop
+using namespace edm;
+using namespace std;
+   // Find objects corresponding to the token and link to the handle
+Handle< std::vector<pat::Jet> > ak8Jets;
+iEvent.getByToken(ak8JetsToken_, ak8Jets);
+   // loop over the jets
+for (std::vector<pat::Jet>::const_iterator jetBegin = ak8Jets->begin(), jetEnd = ak8Jets->end(), ijet = jetBegin; ijet != jetEnd; ++ijet){
+   std::map<std::string,double> NNresults = m_BEST->execute(*ijet);  // ijet is a pat::Jet
+   int particleType = m_BEST->getParticleID();                      // automatically calculate the particle classification
+}
+```
+
+Now, in order to properly compile everything, the BESTAnalyzer and BESTProducer directories must be
+removed as they are not compatable with CMSSW_9_X.
+
+```bash
+cd CMSSW_9_4_8/src/
+rm -r -f BESTAnalysis/BESTAnalyzer/
+rm -r -f BESTAnalysis/BESTProducer/
+```
+
+Finally, in the file ``BESTAnalysis/BoostedEventShapeTagger/data/config.txt`` the ``dnnFile`` must be updated
+to include the full path. After this, everything can be compiled.
+
+```bash
+cd CMSSW_9_4_8/src/
+scram b -j8
+```
+
+Now a ``run.py`` file must be created in order to use the EDanalyzer. The run file should be made in 
+``CMSSW_9_4_8/src/Demo/DemoAnalyzer/test`` and should include the following:
+
+```python
+
+``` 
+
+
 

@@ -35,7 +35,7 @@ These programs should be run on CERN's lxplus or Fermilab's lpc. Gridpacks must 
 cmsenv. To obtain the programs necessary for gridpack creation and some example data cards, please clone my GitHub
 repository.
 
-```git
+```bash
 git clone https://github.com/bregnery/MadGraphCardsForCMSSW
 ```
 
