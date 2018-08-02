@@ -24,9 +24,9 @@
 <meta property="og:url" content="http://localhost:4000/docs/BESTstandaloneTutorial/" />
 <meta property="og:site_name" content="Brendan Regnery" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2018-07-31T21:52:14+02:00" />
+<meta property="article:published_time" content="2018-08-02T23:04:33+02:00" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"BEST Using the Standalone Function","datePublished":"2018-07-31T21:52:14+02:00","dateModified":"2018-07-31T21:52:14+02:00","description":"Introduction","url":"http://localhost:4000/docs/BESTstandaloneTutorial/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"BEST Using the Standalone Function","datePublished":"2018-08-02T23:04:33+02:00","dateModified":"2018-08-02T23:04:33+02:00","description":"Introduction","url":"http://localhost:4000/docs/BESTstandaloneTutorial/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -153,7 +153,16 @@
             <h1>BEST Using the Standalone Function</h1>
             <div id="markdown-content-container"><h2 id="introduction">Introduction</h2>
 
+<p>BEST: Booosted Event Shape Tagger is a neural network that was trained to identify AK8 jets that come
+from heavy Standard Model particles. This neural network was developed by CMS analysts and is
+avaliable on GitHub from <a href="https://github.com/justinrpilot/BESTAnalysis/tree/master">justinrpilot</a>. 
+Information about how BEST was trained is avaliable on <a href="https://arxiv.org/pdf/1606.06859.pdf">arxive</a>.
+This guide describes how to use BEST as a function in a CMS EDAnalyzer.</p>
+
 <h2 id="instructions">Instructions</h2>
+
+<p>These instructions have been adapted from <a href="https://github.com/justinrpilot/BESTAnalysis/tree/master">justinrpilot</a>
+and <a href="https://github.com/demarley/lwtnn/tree/CMSSW_8_0_X-compatible#cmssw-compatibility">demarley</a>.</p>
 
 <h3 id="dependencies">Dependencies</h3>
 
@@ -229,14 +238,36 @@ add the necessary functions to the BuildFile.xml</p>
 <p>In the same directory, the DemoAnalyzer.cc file must also be altered.</p>
 
 <div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="c1">// In the include files
-</span><span class="cp">#include "BESTAnalysis/BoostedEventShapeTagger/interface/BoostedEventShapeTagger.h"
+</span><span class="cp">#include "FWCore/ServiceRegistry/interface/Service.h"
+#include "CommonTools/UtilAlgos/interface/TFileService.h"
+#include "TTree.h"
+#include "TFile.h"
+#include "BESTAnalysis/BoostedEventShapeTagger/interface/BoostedEventShapeTagger.h"
 #include "DataFormats/PatCandidates/interface/Jet.h"
 </span>
 <span class="c1">// In the class, under private:
 </span><span class="n">BoostedEventShapeTagger</span> <span class="o">*</span><span class="n">m_BEST</span><span class="p">;</span>
+<span class="n">TTree</span> <span class="o">*</span><span class="n">bestTree</span><span class="p">;</span>
+<span class="n">edm</span><span class="o">::</span><span class="n">EDGetTokenT</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">pat</span><span class="o">::</span><span class="n">Jet</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">ak8JetsToken_</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span> <span class="n">treeVars</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">listOfVars</span><span class="p">;</span>
 
 <span class="c1">// In the constructor pass the name of the configuration file
-</span><span class="n">m_BEST</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BoostedEventShapeTagger</span><span class="p">(</span> <span class="s">"BESTAnalysis/BoostedEventShapeTagger/data/config.txt"</span> <span class="p">);</span>
+</span><span class="n">m_BEST</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BoostedEventShapeTagger</span><span class="p">(</span> <span class="s">"/full_path/BESTAnalysis/BoostedEventShapeTagger/data/config.txt"</span> <span class="p">);</span>
+   <span class="c1">// Use TFile service to create a tree to store histogram variables
+</span><span class="n">edm</span><span class="o">::</span><span class="n">Service</span><span class="o">&lt;</span><span class="n">TFileService</span><span class="o">&gt;</span> <span class="n">fs</span><span class="p">;</span>
+<span class="n">bestTree</span> <span class="o">=</span> <span class="n">fs</span><span class="o">-&gt;</span><span class="n">make</span><span class="o">&lt;</span><span class="n">TTree</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"bestTree"</span><span class="p">,</span><span class="s">"bestTree"</span><span class="p">);</span>
+   <span class="c1">// Create tree variables and branches
+</span><span class="n">listOfVars</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">"jet1_particleType"</span><span class="p">);</span>
+<span class="n">listOfVars</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">"jet1_dnn_w"</span><span class="p">);</span>
+<span class="n">listOfVars</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">"jet1_dnn_z"</span><span class="p">);</span>
+<span class="n">listOfVars</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">"jet1_dnn_h"</span><span class="p">);</span>
+<span class="n">listOfVars</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">"jet1_dnn_top"</span><span class="p">);</span>
+<span class="n">listOfVars</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">"jet1_dnn_qcd"</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">listOfVars</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+   <span class="n">treeVars</span><span class="p">[</span> <span class="n">listOfVars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">999.99</span><span class="p">;</span>
+   <span class="n">bestTree</span><span class="o">-&gt;</span><span class="n">Branch</span><span class="p">(</span> <span class="p">(</span><span class="n">listOfVars</span><span class="p">[</span><span class="n">i</span><span class="p">]).</span><span class="n">c_str</span><span class="p">()</span> <span class="p">,</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">treeVars</span><span class="p">[</span> <span class="n">listOfVars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">]),</span> <span class="p">(</span><span class="n">listOfVars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="s">"/F"</span><span class="p">).</span><span class="n">c_str</span><span class="p">()</span> <span class="p">);</span>
+<span class="p">}</span>
    <span class="c1">// Define input tags
 </span><span class="n">edm</span><span class="o">::</span><span class="n">InputTag</span> <span class="n">ak8JetsTag_</span><span class="p">;</span>
 <span class="n">ak8JetsTag_</span> <span class="o">=</span> <span class="n">edm</span><span class="o">::</span><span class="n">InputTag</span><span class="p">(</span><span class="s">"slimmedJetsAK8"</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="s">"PAT"</span><span class="p">);</span>
@@ -252,12 +283,128 @@ add the necessary functions to the BuildFile.xml</p>
 </span><span class="n">Handle</span><span class="o">&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">pat</span><span class="o">::</span><span class="n">Jet</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">ak8Jets</span><span class="p">;</span>
 <span class="n">iEvent</span><span class="p">.</span><span class="n">getByToken</span><span class="p">(</span><span class="n">ak8JetsToken_</span><span class="p">,</span> <span class="n">ak8Jets</span><span class="p">);</span>
    <span class="c1">// loop over the jets
-</span><span class="k">for</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">pat</span><span class="o">::</span><span class="n">Jet</span><span class="o">&gt;::</span><span class="n">const_iterator</span> <span class="n">jetBegin</span> <span class="o">=</span> <span class="n">ak8Jets</span><span class="o">-&gt;</span><span class="n">begin</span><span class="p">(),</span> <span class="n">jetEnd</span> <span class="o">=</span> <span class="n">ak8Jets</span><span class="o">-&gt;</span><span class="n">end</span><span class="p">(),</span> <span class="n">ijet</span> <span class="o">=</span> <span class="n">jetBegin</span><span class="p">;</span> <span class="n">ijet</span> <span class="o">!=</span> <span class="n">jetEnd</span><span class="p">;</span> <span class="o">++</span><span class="n">ijet</span><span class="p">){</span>
-   <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">NNresults</span> <span class="o">=</span> <span class="n">m_BEST</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="o">*</span><span class="n">ijet</span><span class="p">);</span>  <span class="c1">// ijet is a pat::Jet
-</span>   <span class="kt">int</span> <span class="n">particleType</span> <span class="o">=</span> <span class="n">m_BEST</span><span class="o">-&gt;</span><span class="n">getParticleID</span><span class="p">();</span>                      <span class="c1">// automatically calculate the particle classification
-</span><span class="p">}</span>
+</span><span class="kt">int</span> <span class="n">nJets</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">pat</span><span class="o">::</span><span class="n">Jet</span><span class="o">&gt;::</span><span class="n">const_iterator</span> <span class="n">jetBegin</span> <span class="o">=</span> <span class="n">ak8Jets</span><span class="o">-&gt;</span><span class="n">begin</span><span class="p">(),</span> <span class="n">jetEnd</span> <span class="o">=</span> <span class="n">ak8Jets</span><span class="o">-&gt;</span><span class="n">end</span><span class="p">(),</span> <span class="n">ijet</span> <span class="o">=</span> <span class="n">jetBegin</span><span class="p">;</span> <span class="n">ijet</span> <span class="o">!=</span> <span class="n">jetEnd</span><span class="p">;</span> <span class="o">++</span><span class="n">ijet</span><span class="p">){</span>
+      <span class="c1">// These are the requirements for a Jet to be used with BEST
+</span>   <span class="k">if</span><span class="p">(</span><span class="n">ijet</span><span class="o">-&gt;</span><span class="n">numberOfDaughters</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="n">ijet</span><span class="o">-&gt;</span><span class="n">pt</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">500</span> <span class="o">&amp;&amp;</span> <span class="n">ijet</span><span class="o">-&gt;</span><span class="n">userFloat</span><span class="p">(</span><span class="s">"ak8PFJetsCHSSoftDropMass"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">40</span> <span class="p">){</span>
+      <span class="n">nJets</span><span class="o">++</span><span class="p">;</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">NNresults</span> <span class="o">=</span> <span class="n">m_BEST</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="o">*</span><span class="n">ijet</span><span class="p">);</span>  <span class="c1">// ijet is a pat::Jet
+</span>      <span class="kt">int</span> <span class="n">particleType</span> <span class="o">=</span> <span class="n">m_BEST</span><span class="o">-&gt;</span><span class="n">getParticleID</span><span class="p">();</span>                      <span class="c1">// automatically calculate the particle classification
+</span>      <span class="k">if</span><span class="p">(</span><span class="n">nJets</span> <span class="o">==</span> <span class="mi">1</span><span class="p">){</span>
+         <span class="n">treeVars</span><span class="p">[</span><span class="s">"jet1_particleType"</span><span class="p">]</span> <span class="o">=</span> <span class="n">particleType</span><span class="p">;</span>
+         <span class="n">treeVars</span><span class="p">[</span><span class="s">"jet1_dnn_w"</span><span class="p">]</span> <span class="o">=</span> <span class="n">NNresults</span><span class="p">[</span><span class="s">"dnn_w"</span><span class="p">];</span>
+         <span class="n">treeVars</span><span class="p">[</span><span class="s">"jet1_dnn_z"</span><span class="p">]</span> <span class="o">=</span> <span class="n">NNresults</span><span class="p">[</span><span class="s">"dnn_z"</span><span class="p">];</span>
+         <span class="n">treeVars</span><span class="p">[</span><span class="s">"jet1_dnn_h"</span><span class="p">]</span> <span class="o">=</span> <span class="n">NNresults</span><span class="p">[</span><span class="s">"dnn_higgs"</span><span class="p">];</span>
+         <span class="n">treeVars</span><span class="p">[</span><span class="s">"jet1_dnn_top"</span><span class="p">]</span> <span class="o">=</span> <span class="n">NNresults</span><span class="p">[</span><span class="s">"dnn_top"</span><span class="p">];</span>
+         <span class="n">treeVars</span><span class="p">[</span><span class="s">"jet1_dnn_qcd"</span><span class="p">]</span> <span class="o">=</span> <span class="n">NNresults</span><span class="p">[</span><span class="s">"dnn_qcd"</span><span class="p">];</span>
+      <span class="p">}</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+   <span class="c1">// Fill the tree that stores the NNresults
+</span><span class="n">bestTree</span><span class="o">-&gt;</span><span class="n">Fill</span><span class="p">();</span>
+
 </code></pre>
 </div>
+
+<p>Now, in order to properly compile everything, the BESTAnalyzer and BESTProducer directories must be
+removed as they are not compatable with CMSSW_9_X.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">cd </span>CMSSW_9_4_8/src/
+rm -r -f BESTAnalysis/BESTAnalyzer/
+rm -r -f BESTAnalysis/BESTProducer/
+</code></pre>
+</div>
+
+<p>Finally, in the file <code class="highlighter-rouge">BESTAnalysis/BoostedEventShapeTagger/data/config.txt</code> the <code class="highlighter-rouge">dnnFile</code> must be updated
+to include the full path. After this, everything can be compiled.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">cd </span>CMSSW_9_4_8/src/
+scram b -j8
+</code></pre>
+</div>
+
+<p>Now a <code class="highlighter-rouge">run.py</code> file must be created in order to use the EDanalyzer. The run file should be made in 
+<code class="highlighter-rouge">CMSSW_9_4_8/src/Demo/DemoAnalyzer/test</code> and should include the following:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="kn">import</span> <span class="nn">FWCore.ParameterSet.Config</span> <span class="kn">as</span> <span class="nn">cms</span>
+
+
+<span class="n">process</span> <span class="o">=</span> <span class="n">cms</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="s">"run"</span><span class="p">)</span>
+
+<span class="n">process</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">"FWCore.MessageService.MessageLogger_cfi"</span><span class="p">)</span>
+
+<span class="n">process</span><span class="o">.</span><span class="n">maxEvents</span> <span class="o">=</span> <span class="n">cms</span><span class="o">.</span><span class="n">untracked</span><span class="o">.</span><span class="n">PSet</span><span class="p">(</span> <span class="nb">input</span> <span class="o">=</span> <span class="n">cms</span><span class="o">.</span><span class="n">untracked</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="n">process</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">cms</span><span class="o">.</span><span class="n">Source</span><span class="p">(</span><span class="s">"PoolSource"</span><span class="p">,</span>
+    <span class="c"># replace 'myfile.root' with the source file you want to use</span>
+    <span class="n">fileNames</span> <span class="o">=</span> <span class="n">cms</span><span class="o">.</span><span class="n">untracked</span><span class="o">.</span><span class="n">vstring</span><span class="p">(</span>
+        <span class="s">"file:myfile.root"</span>
+        <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">process</span><span class="o">.</span><span class="n">MessageLogger</span><span class="o">.</span><span class="n">cerr</span><span class="o">.</span><span class="n">FwkReport</span><span class="o">.</span><span class="n">reportEvery</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="n">process</span><span class="o">.</span><span class="n">run</span> <span class="o">=</span> <span class="n">cms</span><span class="o">.</span><span class="n">EDAnalyzer</span><span class="p">(</span><span class="s">'DemoAnalyzer'</span><span class="p">)</span>
+
+<span class="n">process</span><span class="o">.</span><span class="n">TFileService</span> <span class="o">=</span> <span class="n">cms</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span><span class="s">"TFileService"</span><span class="p">,</span> <span class="n">fileName</span> <span class="o">=</span> <span class="n">cms</span><span class="o">.</span><span class="n">string</span><span class="p">(</span><span class="s">"best_results.root"</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="n">process</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="n">cms</span><span class="o">.</span><span class="n">OutputModule</span><span class="p">(</span><span class="s">"PoolOutputModule"</span><span class="p">,</span>
+                               <span class="n">fileName</span> <span class="o">=</span> <span class="n">cms</span><span class="o">.</span><span class="n">untracked</span><span class="o">.</span><span class="n">string</span><span class="p">(</span><span class="s">"ana_out.root"</span><span class="p">),</span>
+                               <span class="n">SelectEvents</span>   <span class="o">=</span> <span class="n">cms</span><span class="o">.</span><span class="n">untracked</span><span class="o">.</span><span class="n">PSet</span><span class="p">(</span> <span class="n">SelectEvents</span> <span class="o">=</span> <span class="n">cms</span><span class="o">.</span><span class="n">vstring</span><span class="p">(</span><span class="s">'p'</span><span class="p">)</span> <span class="p">),</span>
+                               <span class="n">outputCommands</span> <span class="o">=</span> <span class="n">cms</span><span class="o">.</span><span class="n">untracked</span><span class="o">.</span><span class="n">vstring</span><span class="p">(</span><span class="s">'drop *'</span><span class="p">,</span>
+                                                                      <span class="s">'keep *_*run*_*_*'</span>
+                                                                      <span class="c">#, 'keep *_goodPatJetsCATopTagPF_*_*'</span>
+                                                                      <span class="c">#, 'keep recoPFJets_*_*_*'</span>
+                                                                      <span class="p">)</span>
+                               <span class="p">)</span>
+<span class="n">process</span><span class="o">.</span><span class="n">outpath</span> <span class="o">=</span> <span class="n">cms</span><span class="o">.</span><span class="n">EndPath</span><span class="p">(</span><span class="n">process</span><span class="o">.</span><span class="n">out</span><span class="p">)</span>
+
+<span class="n">process</span><span class="o">.</span><span class="n">p</span> <span class="o">=</span> <span class="n">cms</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">process</span><span class="o">.</span><span class="n">run</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>Now the EDAnalyzer can be run!</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">cd </span>CMSSW_9_4_8/src/Demo/DemoAnalyzer/test/
+cmsenv
+cmsRun run.py
+</code></pre>
+</div>
+<p>The output will be <code class="highlighter-rouge">best_results.root</code> which contains the BEST probabilities for the first
+AK8 jet identified in an event. This process can be expanded to include the BEST probability
+results for all of the AK8 jets in an event. Below is a table explaining what each of the 
+NNresults strings mean.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>String</th>
+      <th>Definition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">dnn_w</code></td>
+      <td>BEST’s calculated probability that the AK8 jet is from a W boson</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">dnn_z</code></td>
+      <td>BEST’s calculated probability that the AK8 jet is from a Z boson</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">dnn_higgs</code></td>
+      <td>BEST’s calculated probability that the AK8 jet is from a Higgs boson</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">dnn_top</code></td>
+      <td>BEST’s calculated probability that the AK8 jet is from a top quark</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">dnn_qcd</code></td>
+      <td>BEST’s calculated probability that the AK8 jet is from a QCD background</td>
+    </tr>
+  </tbody>
+</table>
 
 </div>
             <p class="text-center">

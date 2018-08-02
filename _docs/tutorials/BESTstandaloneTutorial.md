@@ -5,7 +5,16 @@ permalink: /docs/BESTstandaloneTutorial/
 
 ## Introduction
 
+BEST: Booosted Event Shape Tagger is a neural network that was trained to identify AK8 jets that come
+from heavy Standard Model particles. This neural network was developed by CMS analysts and is
+avaliable on GitHub from [justinrpilot](https://github.com/justinrpilot/BESTAnalysis/tree/master). 
+Information about how BEST was trained is avaliable on [arxive](https://arxiv.org/pdf/1606.06859.pdf).
+This guide describes how to use BEST as a function in a CMS EDAnalyzer.
+
 ## Instructions
+
+These instructions have been adapted from [justinrpilot](https://github.com/justinrpilot/BESTAnalysis/tree/master)
+and [demarley](https://github.com/demarley/lwtnn/tree/CMSSW_8_0_X-compatible#cmssw-compatibility).
 
 ### Dependencies
 
@@ -82,14 +91,36 @@ In the same directory, the DemoAnalyzer.cc file must also be altered.
 
 ```cpp
 // In the include files
+#include "FWCore/ServiceRegistry/interface/Service.h"
+#include "CommonTools/UtilAlgos/interface/TFileService.h"
+#include "TTree.h"
+#include "TFile.h"
 #include "BESTAnalysis/BoostedEventShapeTagger/interface/BoostedEventShapeTagger.h"
 #include "DataFormats/PatCandidates/interface/Jet.h"
 
 // In the class, under private:
 BoostedEventShapeTagger *m_BEST;
+TTree *bestTree;
+edm::EDGetTokenT<std::vector<pat::Jet> > ak8JetsToken_;
+std::map<std::string, float> treeVars;
+std::vector<std::string> listOfVars;
 
 // In the constructor pass the name of the configuration file
 m_BEST = new BoostedEventShapeTagger( "/full_path/BESTAnalysis/BoostedEventShapeTagger/data/config.txt" );
+   // Use TFile service to create a tree to store histogram variables
+edm::Service<TFileService> fs;
+bestTree = fs->make<TTree>("bestTree","bestTree");
+   // Create tree variables and branches
+listOfVars.push_back("jet1_particleType");
+listOfVars.push_back("jet1_dnn_w");
+listOfVars.push_back("jet1_dnn_z");
+listOfVars.push_back("jet1_dnn_h");
+listOfVars.push_back("jet1_dnn_top");
+listOfVars.push_back("jet1_dnn_qcd");
+for (unsigned i = 0; i < listOfVars.size(); i++){
+   treeVars[ listOfVars[i] ] = -999.99;
+   bestTree->Branch( (listOfVars[i]).c_str() , &(treeVars[ listOfVars[i] ]), (listOfVars[i]+"/F").c_str() );
+}
    // Define input tags
 edm::InputTag ak8JetsTag_;
 ak8JetsTag_ = edm::InputTag("slimmedJetsAK8", "", "PAT");
@@ -105,10 +136,26 @@ using namespace std;
 Handle< std::vector<pat::Jet> > ak8Jets;
 iEvent.getByToken(ak8JetsToken_, ak8Jets);
    // loop over the jets
+int nJets = 0;
 for (std::vector<pat::Jet>::const_iterator jetBegin = ak8Jets->begin(), jetEnd = ak8Jets->end(), ijet = jetBegin; ijet != jetEnd; ++ijet){
-   std::map<std::string,double> NNresults = m_BEST->execute(*ijet);  // ijet is a pat::Jet
-   int particleType = m_BEST->getParticleID();                      // automatically calculate the particle classification
+      // These are the requirements for a Jet to be used with BEST
+   if(ijet->numberOfDaughters() >= 2 && ijet->pt() >= 500 && ijet->userFloat("ak8PFJetsCHSSoftDropMass") > 40 ){
+      nJets++;
+      std::map<std::string,double> NNresults = m_BEST->execute(*ijet);  // ijet is a pat::Jet
+      int particleType = m_BEST->getParticleID();                      // automatically calculate the particle classification
+      if(nJets == 1){
+         treeVars["jet1_particleType"] = particleType;
+         treeVars["jet1_dnn_w"] = NNresults["dnn_w"];
+         treeVars["jet1_dnn_z"] = NNresults["dnn_z"];
+         treeVars["jet1_dnn_h"] = NNresults["dnn_higgs"];
+         treeVars["jet1_dnn_top"] = NNresults["dnn_top"];
+         treeVars["jet1_dnn_qcd"] = NNresults["dnn_qcd"];
+      }
+   }
 }
+   // Fill the tree that stores the NNresults
+bestTree->Fill();
+
 ```
 
 Now, in order to properly compile everything, the BESTAnalyzer and BESTProducer directories must be
@@ -133,7 +180,58 @@ Now a ``run.py`` file must be created in order to use the EDanalyzer. The run fi
 
 ```python
 
+import FWCore.ParameterSet.Config as cms
+
+
+process = cms.Process("run")
+
+process.load("FWCore.MessageService.MessageLogger_cfi")
+
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
+
+process.source = cms.Source("PoolSource",
+    # replace 'myfile.root' with the source file you want to use
+    fileNames = cms.untracked.vstring(
+        "file:myfile.root"
+        )
+)
+process.MessageLogger.cerr.FwkReport.reportEvery = 1000
+
+process.run = cms.EDAnalyzer('DemoAnalyzer')
+
+process.TFileService = cms.Service("TFileService", fileName = cms.string("best_results.root") )
+
+process.out = cms.OutputModule("PoolOutputModule",
+                               fileName = cms.untracked.string("ana_out.root"),
+                               SelectEvents   = cms.untracked.PSet( SelectEvents = cms.vstring('p') ),
+                               outputCommands = cms.untracked.vstring('drop *',
+                                                                      'keep *_*run*_*_*'
+                                                                      #, 'keep *_goodPatJetsCATopTagPF_*_*'
+                                                                      #, 'keep recoPFJets_*_*_*'
+                                                                      )
+                               )
+process.outpath = cms.EndPath(process.out)
+
+process.p = cms.Path(process.run)
 ``` 
 
+Now the EDAnalyzer can be run!
 
+```bash
+cd CMSSW_9_4_8/src/Demo/DemoAnalyzer/test/
+cmsenv
+cmsRun run.py
+```
+The output will be ``best_results.root`` which contains the BEST probabilities for the first
+AK8 jet identified in an event. This process can be expanded to include the BEST probability
+results for all of the AK8 jets in an event. Below is a table explaining what each of the 
+NNresults strings mean.
+
+| String       | Definition       |
+|--------------|------------------|
+|``dnn_w``     | BEST's calculated probability that the AK8 jet is from a W boson |
+|``dnn_z``     | BEST's calculated probability that the AK8 jet is from a Z boson |
+|``dnn_higgs`` | BEST's calculated probability that the AK8 jet is from a Higgs boson |
+|``dnn_top``   | BEST's calculated probability that the AK8 jet is from a top quark |
+|``dnn_qcd``   | BEST's calculated probability that the AK8 jet is from a QCD background |
 
