@@ -31,9 +31,9 @@ cmsenv
 ### Installation
 
 BEST was programmed in python and trained using [scikit-learn](http://scikit-learn.org/stable/index.html). However, the standard 
-EDAnalyzer in CMS uses C++, so BEST requires an additional package in order to become a C++ function. This package was can be
+EDAnalyzer in CMS uses C++, so BEST requires an additional package in order to become a C++ function. This package can be
 found [here](https://github.com/demarley/lwtnn/tree/CMSSW_8_0_X-compatible). The first step in setting up BEST is installing
-this package:
+this package [2]:
 
 ```bash
 cd CMSSW_9_4_8/src/
@@ -45,7 +45,7 @@ git checkout CMSSW_8_0_X-compatible
 scram b -j8
 ```
 
-Now, BEST can be installed and compiled.
+Now, BEST can be installed and compiled [1].
 
 ```bash
 cd CMSSW_9_4_8/src/
@@ -56,8 +56,7 @@ cd BoostedEventShapeTagger
 scram b -j8
 ```
 
-This configuration allows for BEST to be use as a function in CMS's EDAnalyzer. These instructions were adapted 
-from [BEST](https://github.com/justinrpilot/BESTAnalysis) and [lwtnn](https://github.com/demarley/lwtnn/tree/CMSSW_8_0_X-compatible).
+This configuration allows for BEST to be use as a function in CMS's EDAnalyzer [1].
 
 ### Using the BEST function
 
@@ -81,13 +80,13 @@ scram b
 #### Edit the EDAnalyzer
 
 The directory ``CMSSSW_9_4_8/src/Demo/DemoAnalyzer/plugins`` contains several files that need to be altered. First, 
-add the necessary functions to the BuildFile.xml
+add the necessary functions to the ``BuildFile.xml`` [1].
 
 ```xml
 <use name="lwtnn/lwtnn"/>
 <use name="BESTAnalysis/BoostedEventShapeTagger"/>
 ```
-In the same directory, the DemoAnalyzer.cc file must also be altered. 
+In the same directory, the DemoAnalyzer.cc file must also be altered [1]. 
 
 ```cpp
 // In the include files
@@ -225,7 +224,7 @@ cmsRun run.py
 The output will be ``best_results.root`` which contains the BEST probabilities for the first
 AK8 jet identified in an event. This process can be expanded to include the BEST probability
 results for all of the AK8 jets in an event. Below is a table explaining what each of the 
-NNresults strings mean.
+NNresults strings mean [1].
 
 | String       | Definition       |
 |--------------|------------------|
@@ -234,4 +233,9 @@ NNresults strings mean.
 |``dnn_higgs`` | BEST's calculated probability that the AK8 jet is from a Higgs boson |
 |``dnn_top``   | BEST's calculated probability that the AK8 jet is from a top quark |
 |``dnn_qcd``   | BEST's calculated probability that the AK8 jet is from a QCD background |
+
+## References
+
+1. justinrpilot, BESTAnalysis, https://github.com/justinrpilot/BESTAnalysis/tree/master
+2. demarley, lwtnn, https://github.com/demarley/lwtnn/tree/CMSSW_8_0_X-compatible#cmssw-compatibility
 
