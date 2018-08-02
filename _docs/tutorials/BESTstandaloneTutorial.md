@@ -3,6 +3,9 @@ title: BEST Using the Standalone Function
 permalink: /docs/BESTstandaloneTutorial/
 ---
 
+This guide has been adapted from the instructions by [justinrpilot](https://github.com/justinrpilot/BESTAnalysis/tree/master)
+and [demarley](https://github.com/demarley/lwtnn/tree/CMSSW_8_0_X-compatible#cmssw-compatibility).
+
 ## Introduction
 
 BEST: Booosted Event Shape Tagger is a neural network that was trained to identify AK8 jets that come
@@ -12,9 +15,6 @@ Information about how BEST was trained is avaliable on [arxive](https://arxiv.or
 This guide describes how to use BEST as a function in a CMS EDAnalyzer.
 
 ## Instructions
-
-These instructions have been adapted from [justinrpilot](https://github.com/justinrpilot/BESTAnalysis/tree/master)
-and [demarley](https://github.com/demarley/lwtnn/tree/CMSSW_8_0_X-compatible#cmssw-compatibility).
 
 ### Dependencies
 
