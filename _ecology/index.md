@@ -8,5 +8,3 @@ exploring the connections between physics and ecology. During my undergraduate, 
 some time working with [Trevor Caughlin](http://www.trevorcaughlin.com/) and participated 
 in UF in Kenya with [Todd Palmer](http://www.thepalmerlab.com/TMP/welcome.html).
 On this website, I have documented these experiences.
-
-

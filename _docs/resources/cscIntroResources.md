@@ -8,9 +8,9 @@ permalink: /docs/cscIntroResources/
 A Cathode Strip Chamber (CSC) is a precision gas chamber 
 that can operate with high rates and in irregular magnetic fields. Inside of a CSC are radial cathode strips
 and orthogonal anode wires. As muons pass through these chambers, they create a trail of ions. The electrons 
-in this trail move toward anode wires and the positively charged ions move towrd the cathode strips. Using this
+in this trail move toward anode wires and the positively charged ions move toward the cathode strips. Using this
 information, the paths of muons through the endcaps of the CMS detector can be reconstructed. Below are some 
-great introcutory resources for CSCs:
+great introductory resources for CSCs:
 
 * [Introduction to CSCs](https://indico.cern.ch/event/741985/contributions/3063856/attachments/1687236/2713594/18-07-16_manuelf_csc_intro.pdf)
   provides a quick overview of CSCs

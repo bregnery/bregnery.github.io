@@ -17,9 +17,12 @@ The production Monitoring platform (pMp) website displays the status of Monte Ca
 
 ## Tutorials
 
-Hands-on Advanced Tutorial Sessions (HATS) at the LPC are great learning resource. The generator HATS is especially great, it teaches the basics of using pythia via cmsdriver, reading particle decay chains, using McM, and using tools for calculating cross sections. Below are links to the indico page and the twiki page. The twiki page has detailed exercises that are nice to work through. There is also a recording, which I will add a link to when it is uploaded.
+Hands-on Advanced Tutorial Sessions (HATS) at the LPC are great learning resource. The generator HATS is especially great, 
+it teaches the basics of using Pythia via cmsdriver, reading particle decay chains, using McM, and using tools for calculating 
+cross sections. Below are links to the indico page and the twiki page. The twiki page has detailed exercises that are nice to 
+work through. There is also a recording, which I will add a link to when it is uploaded.
 
-* [HATS Generators Indco Page](https://indico.cern.ch/event/726641/)
+* [HATS Generators Indico Page](https://indico.cern.ch/event/726641/)
 * [HATS Generators TWiki Page](https://twiki.cern.ch/twiki/bin/view/CMS/GeneratorsHATSatLPC2018)
 
 The McM and pMp tutorial by CMS Generators is another useful resource. It has a good overview on how to use McM and pMp. This tutorial also contains some advanced material that is meant for use only by PAG Gen contacts, but the advanced parts are easily skipped. The indico page is below.

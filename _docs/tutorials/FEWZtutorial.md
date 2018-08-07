@@ -7,7 +7,7 @@ permalink: /docs/FEWZtutorial/
 
 ## Introduction
 
-[FEWZ](http://gate.hep.anl.gov/fpetriello/FEWZ.html) is a fortran-based Vegas simulator for calculating leading order (LO), next-to-leading order (NLO), and next-next-leading order (NNLO)
+[FEWZ](http://gate.hep.anl.gov/fpetriello/FEWZ.html) is a Fortran-based Vegas simulator for calculating leading order (LO), next-to-leading order (NLO), and next-next-leading order (NNLO)
 Drell-Yan processes [1]. In the past, I used this to calculate the background Drell-Yan shape for the Higgs to dimuons search. 
 
 ## Instructions

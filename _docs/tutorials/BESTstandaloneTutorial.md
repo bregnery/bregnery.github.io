@@ -8,10 +8,10 @@ and [demarley](https://github.com/demarley/lwtnn/tree/CMSSW_8_0_X-compatible#cms
 
 ## Introduction
 
-BEST: Booosted Event Shape Tagger is a neural network that was trained to identify AK8 jets that come
+BEST: Boosted Event Shape Tagger is a neural network that was trained to identify AK8 jets that come
 from heavy Standard Model particles. This neural network was developed by CMS analysts and is
-avaliable on GitHub from [justinrpilot](https://github.com/justinrpilot/BESTAnalysis/tree/master). 
-Information about how BEST was trained is avaliable on [arxive](https://arxiv.org/pdf/1606.06859.pdf).
+available on GitHub from [justinrpilot](https://github.com/justinrpilot/BESTAnalysis/tree/master). 
+Information about how BEST was trained is available on [arXiv](https://arxiv.org/pdf/1606.06859.pdf).
 This guide describes how to use BEST as a function in a CMS EDAnalyzer.
 
 ## Instructions
@@ -158,7 +158,7 @@ bestTree->Fill();
 ```
 
 Now, in order to properly compile everything, the BESTAnalyzer and BESTProducer directories must be
-removed as they are not compatable with CMSSW_9_X.
+removed as they are not compatible with CMSSW_9_X.
 
 ```bash
 cd CMSSW_9_4_8/src/
@@ -174,7 +174,7 @@ cd CMSSW_9_4_8/src/
 scram b -j8
 ```
 
-Now a ``run.py`` file must be created in order to use the EDanalyzer. The run file should be made in 
+Now a ``run.py`` file must be created in order to use the EDAnalyzer. The run file should be made in 
 ``CMSSW_9_4_8/src/Demo/DemoAnalyzer/test`` and should include the following:
 
 ```python

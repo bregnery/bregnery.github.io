@@ -12,7 +12,7 @@ results to a program like GEANT which simulates the detector response. Most of t
 create automated configuration files.
 
 I preformed a Monte Carlo simulation with two main steps. First, I used MadGraph data cards as inputs for gridpack 
-generation. Then, I used cmsdriver to generate configuration files that used pythia to finish the calculations and
+generation. Then, I used cmsdriver to generate configuration files that used Pythia to finish the calculations and
 GEANT to simulate the detector response. Additionally, cmsdriver converts the results of this simulation into the 
 miniAOD file format.
 
