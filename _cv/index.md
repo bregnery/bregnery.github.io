@@ -25,7 +25,7 @@ Minor: Zoology
 2014-2015 **Undergraduate Research Assistant**, Department of Biology, University of Florida  
 *Advisor: Trevor Caughlin*
 
-### Awards and Afiliations
+### Awards and Affiliations
 
 2018 John Jungerman Graduate Fellowship  
 2017 Outstanding Undergraduate Senior Thesis, Department of Physics, University of Florida  
