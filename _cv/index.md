@@ -17,7 +17,7 @@ Minor: Zoology
 2017-Present **Research Assistant**, Department of Physics, University of California, Davis  
 *Advisor: Robin Erbacher*
 
-2017-2018 **Teaching Assistant**, Department of Physics, University of California, Davis
+2017-Present **Teaching Assistant**, Department of Physics, University of California, Davis
 
 2013-2017 **Undergraduate Research Assistant**, Department of Physics, University of Florida  
 *Advisor: Darin Acosta*
