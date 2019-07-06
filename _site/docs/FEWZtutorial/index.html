@@ -24,8 +24,9 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css">
 
     <link rel="shortcut icon" href="/favicon.ico?1">
-    <!-- Begin Jekyll SEO tag v2.2.2 -->
+    <!-- Begin Jekyll SEO tag v2.5.0 -->
 <title>FEWZ Tutorial | Brendan Regnery</title>
+<meta name="generator" content="Jekyll v3.8.4" />
 <meta property="og:title" content="FEWZ Tutorial" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="FEWZ: Fully Exclusize W and Z Production" />
@@ -34,9 +35,9 @@
 <meta property="og:url" content="http://localhost:4000/docs/FEWZtutorial/" />
 <meta property="og:site_name" content="Brendan Regnery" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2019-07-06T13:48:24+02:00" />
+<meta property="article:published_time" content="2019-07-06T14:25:04+02:00" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"FEWZ Tutorial","datePublished":"2019-07-06T13:48:24+02:00","dateModified":"2019-07-06T13:48:24+02:00","description":"FEWZ: Fully Exclusize W and Z Production","url":"http://localhost:4000/docs/FEWZtutorial/"}</script>
+{"description":"FEWZ: Fully Exclusize W and Z Production","@type":"WebPage","url":"http://localhost:4000/docs/FEWZtutorial/","headline":"FEWZ Tutorial","dateModified":"2019-07-06T14:25:04+02:00","datePublished":"2019-07-06T14:25:04+02:00","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -179,9 +180,8 @@ so first clone this repository. Please note that the files in that repository ar
 An up-to-date version of FEWZ can be found on the
 <a href="http://gate.hep.anl.gov/fpetriello/FEWZ.html">FEWZ website</a>.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/bregnery/FEWZforHiggs2mumu.git
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/bregnery/FEWZforHiggs2mumu.git
+</code></pre></div></div>
 
 <h3 id="installation">Installation</h3>
 
@@ -189,12 +189,11 @@ An up-to-date version of FEWZ can be found on the
 Please note that you do not need to use Condor for submission, a shell submission
 script can be easily written for other systems. I included an example near the end of this tutorial.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">cd </span>FEWZforHiggs2mumu/FEWZ/FEWZ_3.1.b2/
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>FEWZforHiggs2mumu/FEWZ/FEWZ_3.1.b2/
 make fewz <span class="c"># makes local executable</span>
 make condor_fewz <span class="c"># makes executable for Condor systems</span>
 make <span class="c"># makes both, an error will be thrown if you do not have Condor installed</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>All makes will compile the necessary CUBA library provided automatically</p>
 
@@ -214,15 +213,13 @@ CMS with collision energies of 13TeV. These files also use the LHAPDF set which 
 and histograms.txt from the desired directory to the bin directory. Now run the local version of 
 FEWZ in the bin directory by using the shell script local_run.sh with the following command</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>./local_run.sh z &lt;run_dir&gt; input.txt histograms.txt results.dat .. &lt;number_of_processors&gt;
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./local_run.sh z &lt;run_dir&gt; input.txt histograms.txt results.dat .. &lt;number_of_processors&gt;
+</code></pre></div></div>
 
 <p>The <code class="highlighter-rouge">run_dir</code> is a directory created in order to store information from the run. The default <code class="highlighter-rouge">number_of_processors</code> is one.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>./finish.sh &lt;run_dir&gt; &lt;order_prefix&gt;.&lt;name_of_results_file&gt;.dat
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./finish.sh &lt;run_dir&gt; &lt;order_prefix&gt;.&lt;name_of_results_file&gt;.dat
+</code></pre></div></div>
 
 <p>The possible order prefixes are LO, NLO, and NNLO.</p>
 
@@ -232,19 +229,17 @@ FEWZ in the bin directory by using the shell script local_run.sh with the follow
 Specifically, this is for the University of Florida’s HiPerGator 2.0.
 First, load the necessary modules and enter development mode.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>module load ufrc
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module load ufrc
 module load gcc
-srundev --time<span class="o">=</span>04:00:00
-</code></pre>
-</div>
+srundev <span class="nt">--time</span><span class="o">=</span>04:00:00
+</code></pre></div></div>
 
 <p>The submit script used in this example is <code class="highlighter-rouge">FEWZforHiggs2mumu/FEWZ/FEWZ_3.1.b2/bin/dy_nlo_submit.sh</code>. Now, use this to submit
 to the HiPerGator (or other SLURM system).</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>sbatch dy_nlo_submit.sh
-squeue -u &lt;username&gt;
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbatch dy_nlo_submit.sh
+squeue <span class="nt">-u</span> &lt;username&gt;
+</code></pre></div></div>
 
 <p>More information about the University of Florida’s HiPerGator can be found the <a href="https://help.rc.ufl.edu/doc/UFRC_Help_and_Documentation">UFRC Wiki</a>.</p>
 

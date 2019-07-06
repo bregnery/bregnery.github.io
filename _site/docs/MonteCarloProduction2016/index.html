@@ -24,8 +24,9 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css">
 
     <link rel="shortcut icon" href="/favicon.ico?1">
-    <!-- Begin Jekyll SEO tag v2.2.2 -->
+    <!-- Begin Jekyll SEO tag v2.5.0 -->
 <title>Monte Carlo Production with the 2016 CMS Scheme | Brendan Regnery</title>
+<meta name="generator" content="Jekyll v3.8.4" />
 <meta property="og:title" content="Monte Carlo Production with the 2016 CMS Scheme" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="General Steps for Monte Carlo Production" />
@@ -34,9 +35,9 @@
 <meta property="og:url" content="http://localhost:4000/docs/MonteCarloProduction2016/" />
 <meta property="og:site_name" content="Brendan Regnery" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2019-07-06T13:48:24+02:00" />
+<meta property="article:published_time" content="2019-07-06T14:25:04+02:00" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Monte Carlo Production with the 2016 CMS Scheme","datePublished":"2019-07-06T13:48:24+02:00","dateModified":"2019-07-06T13:48:24+02:00","description":"General Steps for Monte Carlo Production","url":"http://localhost:4000/docs/MonteCarloProduction2016/"}</script>
+{"description":"General Steps for Monte Carlo Production","@type":"WebPage","url":"http://localhost:4000/docs/MonteCarloProduction2016/","headline":"Monte Carlo Production with the 2016 CMS Scheme","dateModified":"2019-07-06T14:25:04+02:00","datePublished":"2019-07-06T14:25:04+02:00","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -197,53 +198,46 @@ Below is a tutorial based on how I created gridpacks.</p>
 cmsenv. To obtain the programs necessary for gridpack creation and some example data cards, please clone my GitHub
 repository.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/bregnery/MadGraphCardsForCMSSW
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/bregnery/MadGraphCardsForCMSSW
+</code></pre></div></div>
 
 <p>Now, permissions need to be updated in order to run shell scripts</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>chmod u+x gridpack_generation.sh
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod </span>u+x gridpack_generation.sh
+</code></pre></div></div>
 
 <p>Then, update <code class="highlighter-rouge">gridpack_generation.sh</code> to make sure all fifo pipes are directed to /tmp director. Now, a gridpack can 
 be generated using the desired data card.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>./gridpack_generation.sh &lt;name of process card without _proc_card.dat&gt; &lt;folder containing cards relative to current location&gt;
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./gridpack_generation.sh &lt;name of process card without _proc_card.dat&gt; &lt;folder containing cards relative to current location&gt;
+</code></pre></div></div>
 
 <p>For example,</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>./gridpack_generation.sh Radion_hh_WWWW_jets_narrow_M3500 cards/Radion_hh_WWWW_jets_narrow_M3500/
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./gridpack_generation.sh Radion_hh_WWWW_jets_narrow_M3500 cards/Radion_hh_WWWW_jets_narrow_M3500/
+</code></pre></div></div>
 
 <h4 id="using-cluster-to-create-gridpacks">Using Cluster to Create Gridpacks</h4>
 
 <p>To submit jobs on lxplus and store them locally, use the <code class="highlighter-rouge">submit_gridpack_generation_local.sh</code></p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>./submit_gridpack_generation_local.sh &lt;memory&gt; &lt;queue <span class="k">for </span>master job&gt; &lt;name of process card without _proc_card.dat&gt; &lt;folder containing cards relative to current location&gt; &lt;queue&gt;
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./submit_gridpack_generation_local.sh &lt;memory&gt; &lt;queue <span class="k">for </span>master job&gt; &lt;name of process card without _proc_card.dat&gt; &lt;folder containing cards relative to current location&gt; &lt;queue&gt;
+</code></pre></div></div>
 
 <p>For example,</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>./submit_gridpack_generation_local.sh 15000 2nw Radion_hh_WWWW_jets_narrow_M3500 cards/Radion_hh_WWWW_jets_narrow_M3500/ 8nh
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./submit_gridpack_generation_local.sh 15000 2nw Radion_hh_WWWW_jets_narrow_M3500 cards/Radion_hh_WWWW_jets_narrow_M3500/ 8nh
+</code></pre></div></div>
 
 <h4 id="notes-about-creatingediting-data-cards">Notes about Creating/Editing Data Cards</h4>
 
 <p>When creating or editing data cards, make sure to create four cards with the same name as your repository.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>&lt;repository&gt;_proc_card.dat
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;repository&gt;_proc_card.dat
 &lt;repository&gt;_run_card.dat
 &lt;repository&gt;_customizecards.dat
 &lt;repository&gt;_extramodels.dat
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Make sure to list models needed in extra models if generating a sample with something other than the Standard Model. 
 The number of events is listed listed in 
@@ -287,105 +281,93 @@ files.</p>
 
 <p>Obtain the proper CMSSW release, clone this repository, and compile.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>cmsrel CMSSW_7_1_30
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmsrel CMSSW_7_1_30
 <span class="nb">cd </span>CMSSW_7_1_30/src/
 git clone https://github.com/bregnery/hhMCgenerator.git
 scram b
 cmsenv
 <span class="nb">cd </span>hhMCgenerator
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Make sure to copy your gridpack into this directory. Now, obtain the proper python fragments (these should also be included
 on the McM page).</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>curl -s --insecure https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_fragment/B2G-RunIISummer15wmLHEGS-01167 --retry 2 --create-dirs -o Configuration/GenProduction/python/B2G-RunIISummer15wmLHEGS-01167-fragment.py 
-<span class="o">[</span> -s Configuration/GenProduction/python/B2G-RunIISummer15wmLHEGS-01167-fragment.py <span class="o">]</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-s</span> <span class="nt">--insecure</span> https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_fragment/B2G-RunIISummer15wmLHEGS-01167 <span class="nt">--retry</span> 2 <span class="nt">--create-dirs</span> <span class="nt">-o</span> Configuration/GenProduction/python/B2G-RunIISummer15wmLHEGS-01167-fragment.py 
+<span class="o">[</span> <span class="nt">-s</span> Configuration/GenProduction/python/B2G-RunIISummer15wmLHEGS-01167-fragment.py <span class="o">]</span>
 scram b
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Now modify the python fragment to input the proper grid pack. In 
 <code class="highlighter-rouge">CMSSW_X_X_X/src/Configuration/Genproduction/python/B2G-RunIISummer15wmLHEGS-01167-fragment.py</code> line 5 should 
 be altered to include the gridpack tarball file.</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">args</span> <span class="o">=</span> <span class="n">cms</span><span class="o">.</span><span class="n">vstring</span><span class="p">(</span><span class="s">'&lt;gridpack_tarball&gt;.tar.xz'</span><span class="p">),</span>
-</code></pre>
-</div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">args</span> <span class="o">=</span> <span class="n">cms</span><span class="o">.</span><span class="n">vstring</span><span class="p">(</span><span class="s">'&lt;gridpack_tarball&gt;.tar.xz'</span><span class="p">),</span>
+</code></pre></div></div>
 
 <p>Also make sure that the fragment contains a number of events less than or equal to the number of events used in the 
 MadGraph cards that produced the gridpack.</p>
 
 <p>Now, a cfg file can be produced using cmsdriver with the python fragment.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>cmsDriver.py Configuration/GenProduction/python/B2G-RunIISummer15wmLHEGS-01167-fragment.py --fileout file:B2G-RunIISummer15wmLHEGS-01167.root --mc --eventcontent RAWSIM,LHE --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1,Configuration/DataProcessing/Utils.addMonitoring --datatier GEN-SIM,LHE --conditions MCRUN2_71_V1::All --beamspot Realistic50ns13TeVCollision --step LHE,GEN,SIM --magField 38T_PostLS1 --python_filename B2G-RunIISummer15wmLHEGS-01167_1_cfg.py --no_exec -n 97
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmsDriver.py Configuration/GenProduction/python/B2G-RunIISummer15wmLHEGS-01167-fragment.py <span class="nt">--fileout</span> file:B2G-RunIISummer15wmLHEGS-01167.root <span class="nt">--mc</span> <span class="nt">--eventcontent</span> RAWSIM,LHE <span class="nt">--customise</span> SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1,Configuration/DataProcessing/Utils.addMonitoring <span class="nt">--datatier</span> GEN-SIM,LHE <span class="nt">--conditions</span> MCRUN2_71_V1::All <span class="nt">--beamspot</span> Realistic50ns13TeVCollision <span class="nt">--step</span> LHE,GEN,SIM <span class="nt">--magField</span> 38T_PostLS1 <span class="nt">--python_filename</span> B2G-RunIISummer15wmLHEGS-01167_1_cfg.py <span class="nt">--no_exec</span> <span class="nt">-n</span> 97
+</code></pre></div></div>
 
 <p>Then, use the configuration file to produce GEN-SIM and LHE files.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>scram b
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scram b
 cmsRun B2G-RunIISummer15wmLHEGS-01167_1_cfg.py
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>If the program runs correctly, you should have a .root file to use with the next step.</p>
 
 <p>Production of GEN-SIM-RAW and AODSIM files requires CMSSW_8_0_21.
 Obtain this CMSSW release, clone this repository, and compile.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>cmsrel CMSSW_8_0_21
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmsrel CMSSW_8_0_21
 <span class="nb">cd </span>CMSSW_8_0_21/src/
 git clone https://github.com/bregnery/hhMCgenerator.git
 scram b
 cmsenv
 <span class="nb">cd </span>hhMCgenerator
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Make sure to copy your GEN-SIM and LHE files from the previous step to the new directory.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>cp &lt;your_path&gt;/CMSSW_7_1_30/src/hhMCgenerator/B2G-RunIISummer15wmLHEGS-01167_inLHE.root .
-cp &lt;your_path&gt;/CMSSW_7_1_30/src/hhMCgenerator/B2G-RunIISummer15wmLHEGS-01167.root .
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp</span> &lt;your_path&gt;/CMSSW_7_1_30/src/hhMCgenerator/B2G-RunIISummer15wmLHEGS-01167_inLHE.root <span class="nb">.</span>
+<span class="nb">cp</span> &lt;your_path&gt;/CMSSW_7_1_30/src/hhMCgenerator/B2G-RunIISummer15wmLHEGS-01167.root <span class="nb">.</span>
+</code></pre></div></div>
 
 <p>Now, another cfg file can be produced using cmsdriver. Note that the DAS client has changed so you will need to copy the pile up files from <code class="highlighter-rouge">B2G-RunIISummer16DR80Premix-01267_1_cfg.py</code>.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>cmsDriver.py step1 --fileout file:Radion_hh_wwwww_M3500_GEN-SIM-RAW.root  --pileup_input <span class="s2">"dbs:/Neutrino_E-10_gun/RunIISpring15PrePremix-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v2-v2/GEN-SIM-DIGI-RAW"</span> --mc --eventcontent PREMIXRAW --datatier GEN-SIM-RAW --conditions 80X_mcRun2_asymptotic_2016_TrancheIV_v6 --step DIGIPREMIX_S2,DATAMIX,L1,DIGI2RAW,HLT:@frozen2016 --nThreads 4 --datamix PreMix --era Run2_2016 --python_filename B2G-RunIISummer16DR80Premix-01267_1_cfg.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring -n 97
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmsDriver.py step1 <span class="nt">--fileout</span> file:Radion_hh_wwwww_M3500_GEN-SIM-RAW.root  <span class="nt">--pileup_input</span> <span class="s2">"dbs:/Neutrino_E-10_gun/RunIISpring15PrePremix-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v2-v2/GEN-SIM-DIGI-RAW"</span> <span class="nt">--mc</span> <span class="nt">--eventcontent</span> PREMIXRAW <span class="nt">--datatier</span> GEN-SIM-RAW <span class="nt">--conditions</span> 80X_mcRun2_asymptotic_2016_TrancheIV_v6 <span class="nt">--step</span> DIGIPREMIX_S2,DATAMIX,L1,DIGI2RAW,HLT:@frozen2016 <span class="nt">--nThreads</span> 4 <span class="nt">--datamix</span> PreMix <span class="nt">--era</span> Run2_2016 <span class="nt">--python_filename</span> B2G-RunIISummer16DR80Premix-01267_1_cfg.py <span class="nt">--no_exec</span> <span class="nt">--customise</span> Configuration/DataProcessing/Utils.addMonitoring <span class="nt">-n</span> 97
 
-cmsDriver.py step2 --filein file:Radion_hh_wwwww_M3500_GEN-SIM-RAW.root --fileout file:B2G-RunIISummer16DR80Premix-Radion_hh_wwww_M3500_AODSIM.root --mc --eventcontent AODSIM --runUnscheduled --datatier AODSIM --conditions 80X_mcRun2_asymptotic_2016_TrancheIV_v6 --step RAW2DIGI,RECO,EI --nThreads 4 --era Run2_2016 --python_filename B2G-RunIISummer16DR80Premix-AODSIM_2_cfg.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring -n 97
-</code></pre>
-</div>
+cmsDriver.py step2 <span class="nt">--filein</span> file:Radion_hh_wwwww_M3500_GEN-SIM-RAW.root <span class="nt">--fileout</span> file:B2G-RunIISummer16DR80Premix-Radion_hh_wwww_M3500_AODSIM.root <span class="nt">--mc</span> <span class="nt">--eventcontent</span> AODSIM <span class="nt">--runUnscheduled</span> <span class="nt">--datatier</span> AODSIM <span class="nt">--conditions</span> 80X_mcRun2_asymptotic_2016_TrancheIV_v6 <span class="nt">--step</span> RAW2DIGI,RECO,EI <span class="nt">--nThreads</span> 4 <span class="nt">--era</span> Run2_2016 <span class="nt">--python_filename</span> B2G-RunIISummer16DR80Premix-AODSIM_2_cfg.py <span class="nt">--no_exec</span> <span class="nt">--customise</span> Configuration/DataProcessing/Utils.addMonitoring <span class="nt">-n</span> 97
+</code></pre></div></div>
 
 <p>Now, use the configuration file to produce GEN-SIM-RAW.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>scram b
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scram b
 cmsRun B2G-RunIISummer16DR80Premix-01267_1_cfg.py
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>If the program was successful the output will be Radion_hh_wwwww_M3500_GEN-SIM-RAW.root. Then, use the next configuration file to produce AODSIM.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>scram b
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scram b
 cmsRun B2G-RunIISummer16DR80Premix-AODSIM_2_cfg.py
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Now, there should be <code class="highlighter-rouge">B2G-RunIISummer16DR80Premix-Radion_hh_wwww_M3500_AODSIM.root</code></p>
 
 <p>Next, create the last cfg file using cmsdriver.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>cmsDriver.py step1 --fileout file:Radion_hh_wwww_M3500_MiniAOD.root --mc --eventcontent MINIAODSIM --runUnscheduled --datatier MINIAODSIM --conditions 80X_mcRun2_asymptotic_2016_TrancheIV_v6 --step PAT --nThreads 4 --era Run2_2016 --python_filename B2G-RunIISummer16MiniAODv2_Radion_hh_wwww_M3500-MiniAOD_1_cfg.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring -n 82
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmsDriver.py step1 <span class="nt">--fileout</span> file:Radion_hh_wwww_M3500_MiniAOD.root <span class="nt">--mc</span> <span class="nt">--eventcontent</span> MINIAODSIM <span class="nt">--runUnscheduled</span> <span class="nt">--datatier</span> MINIAODSIM <span class="nt">--conditions</span> 80X_mcRun2_asymptotic_2016_TrancheIV_v6 <span class="nt">--step</span> PAT <span class="nt">--nThreads</span> 4 <span class="nt">--era</span> Run2_2016 <span class="nt">--python_filename</span> B2G-RunIISummer16MiniAODv2_Radion_hh_wwww_M3500-MiniAOD_1_cfg.py <span class="nt">--no_exec</span> <span class="nt">--customise</span> Configuration/DataProcessing/Utils.addMonitoring <span class="nt">-n</span> 82
+</code></pre></div></div>
 
 <p>Now use the configuration file to produce MiniAOD.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>scram b
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scram b
 cmsRun B2G-RunIISummer16MiniAODv2_Radion_hh_wwww_M3500-MiniAOD_1_cfg.py
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>If the whole process was successful, the output should be <code class="highlighter-rouge">Radion_hh_wwww_M3500_MiniAOD.root</code>.</p>
 
