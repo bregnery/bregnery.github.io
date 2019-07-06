@@ -39,8 +39,8 @@ The Muon Endcap Spectrometer tracks muons as they pass through the forward regio
 consists of three different types of gaseous chambers: Resistive Plate Chambers ([RPCs](http://cms.web.cern.ch/news/resistive-plate-chambers)),
 Cathode Strip Chambers ([CSCs](http://cms.web.cern.ch/news/cathode-strip-chambers)), and 
 Gas Electron Multipliers ([GEMs](https://twiki.cern.ch/twiki/bin/view/MPGD/GEMDetectorProduction)). In 2019, the LHC 
-will be shutdown for upgrades. During this time, the CSCs will be refurbished and upgraded and additional GEM chambers will
-be installed. I will be participating in these upgrades.
+was shutdown for 2 years of upgrades. During this time, the CSCs will be refurbished and upgraded and additional GEM chambers will
+be installed. I am participating in these upgrades, by helping with the installation and commissioning of the new GE1/1 GEM chambers.
 
 ## Previous Work
 

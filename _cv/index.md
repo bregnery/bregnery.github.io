@@ -35,6 +35,9 @@ Fall 2012, Spring 2016 University of Florida Dean's List
 
 ### Conferences and Seminars
 
+* Brendan Regnery, Robin Erbacher, Justin Pilot, John Conway. 2018. "Improvement of Jet Substructure 
+Techniques by Studying HH -> WWWW -> Hadrons with the CMS Experiment" Talk. NorCal HEP-EXchange 
+
 * Brendan Regnery, Darin Acosta, Justin Hugon. 2015. “A Study to Enhance the Sensitivity for the Discovery 
 of The Higgs Boson Coupling to Dimuons” Talk. American Physical Society (APS) April Meeting
 
@@ -55,7 +58,7 @@ for Seed Dispersal and Tree Demography” Poster. Undergraduate Research Assista
 
 ### Service
 
-2018-Present **Colloquium Committee**, Graduate Organization of Physics Students (GradOPS), University of California, Davis
+2018-2019 **Colloquium Committee**, Graduate Organization of Physics Students (GradOPS), University of California, Davis
 
 2018 **Founding Memeber**, Graduate Organization of Physics Students (GradOPS), University of California, Davis
 
@@ -65,6 +68,6 @@ for Seed Dispersal and Tree Demography” Poster. Undergraduate Research Assista
 
 ### Skills
 
-**Programming**: C++, Python, UNIX, LaTeX, ROOT, CMS Software, Octave/MATLAB, R  
+**Programming**: C++, Python, UNIX, LaTeX, Keras, ROOT, CMS Software, Octave/MATLAB, R  
 **Languages**: French (Basic)
 
